@@ -14,7 +14,7 @@ public class PeasantMover : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-/*
+
         if (Input.GetKey("d"))
         {
             rb.AddForce(sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
@@ -33,18 +33,18 @@ public class PeasantMover : MonoBehaviour
         if (Input.GetKey("s"))
         {
             rb.AddForce(0,  0, -sidewaysForce * Time.deltaTime, ForceMode.VelocityChange);
-        }*/
+        }
     }
 
     void Awake() {    
         rb.position = new Vector3(5.0f, 0.0f, 5.0f);
     }
 
-    void Update() {
+    /*void Update() {
         float step =  speed * Time.deltaTime; // calculate distance to move
 
         rb.position = Vector3.MoveTowards(rb.position, new Vector3(100.0f, 0.0f, 100.0f), step);
         //rb.position = new Vector3(100.0f, 0.0f, 100.0f);
     
-    }
+    }*/
 }
