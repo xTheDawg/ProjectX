@@ -6,6 +6,7 @@ using UnityEngine;
 public class PeasantMover : MonoBehaviour
 {
     public Rigidbody rb;
+    public Animator anim;
 
     public float sidewaysForce = 500f;
 
@@ -17,22 +18,30 @@ public class PeasantMover : MonoBehaviour
 
         if (Input.GetKey("d"))
         {
-            rb.AddForce(sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+            anim.SetBool("isTurningRight",true);   
+        }else{
+            anim.SetBool("isTurningRight",false);
         }
         
         if (Input.GetKey("a"))
         {
-            rb.AddForce(-sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+            anim.SetBool("isTurningLeft",true);   
+        }else{
+            anim.SetBool("isTurningLeft",false);
         }
         
         if (Input.GetKey("w"))
         {
-            rb.AddForce(0,  0, sidewaysForce * Time.deltaTime, ForceMode.VelocityChange);
+            anim.SetBool("isWalking",true);   
+        }else{
+            anim.SetBool("isWalking",false);
         }
         
         if (Input.GetKey("s"))
         {
-            rb.AddForce(0,  0, -sidewaysForce * Time.deltaTime, ForceMode.VelocityChange);
+            anim.SetBool("isWalkingBack",true);   
+        }else{
+            anim.SetBool("isWalkingBack",false);
         }
     }
 
