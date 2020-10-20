@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33157839597231616}
   - component: {fileID: 23687926705456878}
   - component: {fileID: 95992057156065374}
+  - component: {fileID: 7925628479987808846}
   m_Layer: 0
   m_Name: PT_Medieval_Rock_6
   m_TagString: Untagged
@@ -99,3 +100,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!135 &7925628479987808846
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445918223798424}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.21
+  m_Center: {x: -0.005734779, y: 0.044102248, z: 0.02073463}

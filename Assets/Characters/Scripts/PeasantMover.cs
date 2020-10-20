@@ -1,59 +1,53 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 public class PeasantMover : MonoBehaviour
 {
-    public Rigidbody rb;
-    public Animator anim;
+    private float speed;
+    public float walkSpeed = 0.03f;
+    public float rotationSpeed = 2.5f;
+    
+    Rigidbody rigidbody;
+    Animator animator;
+    CapsuleCollider capsuleCollider;
 
-    public float sidewaysForce = 500f;
+    public Transform cameraTransform;
 
-    public float speed = 10.0f;
+    private float yaw = 0;
+    private float pitch = 0;
+
+    private void Start()
+    {
+        rigidbody = gameObject.GetComponent<Rigidbody>();
+        animator = gameObject.GetComponent<Animator>();
+        capsuleCollider = gameObject.GetComponent<CapsuleCollider>();
+    }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        float z = Input.GetAxis("Vertical") * speed;
+        float y = Input.GetAxis("Horizontal") * rotationSpeed;
+        transform.Translate(0, 0, z);
+        transform.Rotate(0, y, 0);
 
-        if (Input.GetKey("d"))
+        yaw += rotationSpeed * Input.GetAxis("Mouse X");
+        pitch -= rotationSpeed * Input.GetAxis("Mouse Y");
+        transform.eulerAngles = new Vector3(0, yaw, 0);
+        cameraTransform.eulerAngles = new Vector3(pitch, yaw, 0);
+
+        if (Input.GetKey(KeyCode.W))
         {
-            anim.SetBool("isTurningRight",true);   
-        }else{
-            anim.SetBool("isTurningRight",false);
+            animator.SetBool("isWalking", true);
         }
-        
-        if (Input.GetKey("a"))
+        else
         {
-            anim.SetBool("isTurningLeft",true);   
-        }else{
-            anim.SetBool("isTurningLeft",false);
+            animator.SetBool("isWalking", false);
         }
-        
-        if (Input.GetKey("w"))
-        {
-            anim.SetBool("isWalking",true);   
-        }else{
-            anim.SetBool("isWalking",false);
-        }
-        
-        if (Input.GetKey("s"))
-        {
-            anim.SetBool("isWalkingBack",true);   
-        }else{
-            anim.SetBool("isWalkingBack",false);
-        }
+
+        speed = walkSpeed;
     }
-
-    void Awake() {    
-        rb.position = new Vector3(5.0f, 0.0f, 5.0f);
-    }
-
-    /*void Update() {
-        float step =  speed * Time.deltaTime; // calculate distance to move
-
-        rb.position = Vector3.MoveTowards(rb.position, new Vector3(100.0f, 0.0f, 100.0f), step);
-        //rb.position = new Vector3(100.0f, 0.0f, 100.0f);
-    
-    }*/
 }

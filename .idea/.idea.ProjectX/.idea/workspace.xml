@@ -20,24 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="425fe18b-a005-4c16-b8b1-5f6e193e171e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjectX/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjectX/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjectX/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjectX/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjectX/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjectX/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Characters/Prefabs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Characters/Prefabs/PT_Medieval_Male_Peasant_01_a.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Characters/Prefabs/PT_Medieval_Male_Peasant_01_a.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Characters/Prefabs/PT_Medieval_Male_Peasant_01_a_Animator Controller.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Characters/Prefabs/PT_Medieval_Male_Peasant_01_a_Animator Controller.controller" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Characters/Scripts/PeasantMover.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Characters/Scripts/PeasantMover.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Polytope Studio/Lowpoly Medieval Characters/Prefabs/PT_Medieval_Male_Peasant_01_a.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Polytope Studio/Lowpoly Medieval Characters/Prefabs/PT_Medieval_Male_Peasant_01_a.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Polytope Studio/Lowpoly Medieval Characters/Prefabs/PT_Medieval_Male_Peasant_01_d.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Polytope Studio/Lowpoly Medieval Characters/Prefabs/PT_Medieval_Male_Peasant_01_d.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Polytope Studio/Lowpoly Medieval Characters/Prefabs/PT_Medieval_Male_Peasant_01_e.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Polytope Studio/Lowpoly Medieval Characters/Prefabs/PT_Medieval_Male_Peasant_01_e.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Polytope Studio/Lowpoly Medieval Characters/Sources/Meshes/PT_Medieval_Male_Peasant_01_d.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Polytope Studio/Lowpoly Medieval Characters/Sources/Meshes/PT_Medieval_Male_Peasant_01_d.fbx.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Polytope Studio/Lowpoly Medieval Characters/Sources/Meshes/PT_Medieval_Male_Peasant_01_e.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Polytope Studio/Lowpoly Medieval Characters/Sources/Meshes/PT_Medieval_Male_Peasant_01_e.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,6 +84,7 @@
       <updated>1602837275006</updated>
       <workItem from="1602837304548" duration="1678000" />
       <workItem from="1603014956961" duration="1841000" />
+      <workItem from="1603207157951" duration="2166000" />
     </task>
     <servers />
   </component>
@@ -118,6 +103,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
