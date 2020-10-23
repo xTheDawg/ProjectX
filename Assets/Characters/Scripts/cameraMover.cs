@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,16 +7,17 @@ using UnityEngine.UI;
 public class cameraMover : MonoBehaviour
 {
     public Transform cameraTransform;
-    
-    private float yaw = 0;
-    private float rotationSpeed = 2.5f;
+
+    private static float angle = 30f;
+    private float yaw = 0f;
+    private float rotationSpeed = 3f;
+    private float sinAngle = Mathf.Sin(angle * (Mathf.PI) / 180);
+    private float cosAngle = Mathf.Cos(angle * (Mathf.PI) / 180);
     public float speed = 15f;
-    private float cameraSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
-        cameraTransform.rotation = Quaternion.Euler(30, 0, 0);
         cameraTransform.position = new Vector3(0, 10, 0);
     }
 
@@ -23,17 +25,44 @@ public class cameraMover : MonoBehaviour
     void FixedUpdate()
     {
         yaw += rotationSpeed * Input.GetAxis("Mouse X");
-        cameraTransform.eulerAngles = new Vector3(0, yaw, 0);
-        cameraSpeed = Input.GetAxis("Vertical") * speed * Time.deltaTime;
+        cameraTransform.eulerAngles = new Vector3(angle, yaw, 0);
 
         if (Input.GetKey(KeyCode.W))
         {
-            cameraTransform.transform.position += Time.deltaTime * speed * new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+            cameraTransform.transform.Translate(Vector3.forward * speed * Time.deltaTime * (1 + sinAngle) * 0.7f);
+            cameraTransform.transform.Translate(Vector3.up * speed * Time.deltaTime * cosAngle * 0.7f);
         }
         
         if (Input.GetKey(KeyCode.A))
         {
-            cameraTransform.transform.position = Vector3.left * speed * Time.deltaTime;
+            cameraTransform.transform.Translate(Vector3.left * speed * Time.deltaTime);
+        }
+        
+        if (Input.GetKey(KeyCode.S))
+        {
+            cameraTransform.transform.Translate(Vector3.back * speed * Time.deltaTime * (1 + sinAngle) * 0.7f);
+            cameraTransform.transform.Translate(Vector3.down * speed * Time.deltaTime * cosAngle * 0.7f);
+        }
+        
+        if (Input.GetKey(KeyCode.D))
+        {
+            cameraTransform.transform.Translate(Vector3.right * speed * Time.deltaTime);
+        }
+
+        if (Input.GetKey(KeyCode.Q))
+        {
+            if (cameraTransform.transform.position.y >= 5)
+            {
+                cameraTransform.transform.Translate(Vector3.down * speed * Time.deltaTime);
+            }
+        }
+        
+        if (Input.GetKey(KeyCode.E))
+        {
+            if (cameraTransform.transform.position.y <= 30)
+            {
+                cameraTransform.transform.Translate(Vector3.up * speed * Time.deltaTime);
+            }
         }
     }
 }

@@ -7,8 +7,7 @@ using UnityEngine;
 public class PeasantMover : MonoBehaviour
 {
     private float speed;
-    public float walkSpeed = 5f;
-    public float rotationSpeed = 2.5f;
+    public float walkSpeed = 3f;
     public Vector3 targetPosition;
     public Vector3 lookAtTarget;
     public Quaternion playerRot;
@@ -18,9 +17,7 @@ public class PeasantMover : MonoBehaviour
     Rigidbody rigidbody;
     Animator animator;
     CapsuleCollider capsuleCollider;
-
-    public Transform cameraTransform;
-
+    
     private float yaw = 0;
     private float pitch = 0;
 
