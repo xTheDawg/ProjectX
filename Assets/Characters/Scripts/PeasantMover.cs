@@ -7,8 +7,13 @@ using UnityEngine;
 public class PeasantMover : MonoBehaviour
 {
     private float speed;
-    public float walkSpeed = 0.03f;
+    public float walkSpeed = 5f;
     public float rotationSpeed = 2.5f;
+    public Vector3 targetPosition;
+    public Vector3 lookAtTarget;
+    public Quaternion playerRot;
+    private float rotSpeed = 5f;
+    private bool moving = false;
     
     Rigidbody rigidbody;
     Animator animator;
@@ -29,7 +34,7 @@ public class PeasantMover : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        float z = Input.GetAxis("Vertical") * speed;
+        /*float z = Input.GetAxis("Vertical") * speed;
         float y = Input.GetAxis("Horizontal") * rotationSpeed;
         transform.Translate(0, 0, z);
         transform.Rotate(0, y, 0);
@@ -48,6 +53,50 @@ public class PeasantMover : MonoBehaviour
             animator.SetBool("isWalking", false);
         }
 
-        speed = walkSpeed;
+        speed = walkSpeed;*/
+
+        if (Input.GetMouseButton(0))
+        {
+            SetTargetPosition();
+        }
+
+        if (moving)
+        {
+            Move();
+        }
+        
+    }
+    
+    void SetTargetPosition()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 500))
+        {
+            targetPosition = hit.point;
+            //this.transform.LookAt(targetPosition);
+            lookAtTarget = new Vector3(targetPosition.x - transform.position.x,
+                transform.position.y,
+                targetPosition.z - transform.position.z);
+            playerRot = Quaternion.LookRotation(lookAtTarget);
+            moving = true;
+            animator.SetBool("isWalking", true);
+        }
+    }
+
+    void Move()
+    {
+        transform.rotation = Quaternion.Slerp(transform.rotation,
+            playerRot,
+            rotSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position,
+            targetPosition,
+            walkSpeed * Time.deltaTime);
+        if (transform.position == targetPosition)
+        {
+            moving = false;
+            animator.SetBool("isWalking", false);
+        }
     }
 }
