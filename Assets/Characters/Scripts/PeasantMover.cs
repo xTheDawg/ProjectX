@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 public class PeasantMover : MonoBehaviour
@@ -17,9 +14,6 @@ public class PeasantMover : MonoBehaviour
     Rigidbody rigidbody;
     Animator animator;
     CapsuleCollider capsuleCollider;
-    
-    private float yaw = 0;
-    private float pitch = 0;
 
     private void Start()
     {
@@ -31,27 +25,6 @@ public class PeasantMover : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        /*float z = Input.GetAxis("Vertical") * speed;
-        float y = Input.GetAxis("Horizontal") * rotationSpeed;
-        transform.Translate(0, 0, z);
-        transform.Rotate(0, y, 0);
-
-        yaw += rotationSpeed * Input.GetAxis("Mouse X");
-        pitch -= rotationSpeed * Input.GetAxis("Mouse Y");
-        transform.eulerAngles = new Vector3(0, yaw, 0);
-        cameraTransform.eulerAngles = new Vector3(pitch, yaw, 0);
-
-        if (Input.GetKey(KeyCode.W))
-        {
-            animator.SetBool("isWalking", true);
-        }
-        else
-        {
-            animator.SetBool("isWalking", false);
-        }
-
-        speed = walkSpeed;*/
-
         if (Input.GetMouseButton(0))
         {
             SetTargetPosition();

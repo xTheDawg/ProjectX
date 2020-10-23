@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class cameraMover : MonoBehaviour
 {
     public Transform cameraTransform;
 
     private static float angle = 30f;
-    private float yaw = 0f;
+    private float yaw = 90f;
     private float rotationSpeed = 3f;
     private float sinAngle = Mathf.Sin(angle * (Mathf.PI) / 180);
     private float cosAngle = Mathf.Cos(angle * (Mathf.PI) / 180);
@@ -18,7 +14,7 @@ public class cameraMover : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cameraTransform.position = new Vector3(0, 10, 0);
+        cameraTransform.position = new Vector3(-20, 10, 0);
     }
 
     // Update is called once per frame
