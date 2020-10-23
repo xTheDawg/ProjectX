@@ -27,6 +27,11 @@
 .vs/
 .vscode/
 
+# Intellij
+.idea/
+*.iml
+*.iws
+
 # Gradle cache directory
 .gradle/
 
