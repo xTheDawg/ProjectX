@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class ReplenishHungerSelector : Selector
-{
-}
+﻿    public class ReplenishHungerSelector : Selector
+    {
+        public ReplenishHungerSelector() {
+            m_nodes.Add(new FetchFoodSequence());
+            m_nodes.Add(new GatherFoodSequence());
+        }
+    }
