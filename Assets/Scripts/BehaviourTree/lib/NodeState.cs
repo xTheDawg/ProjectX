@@ -1,6 +1,6 @@
 ﻿/** Enum containing the possible states a node can return */
-public enum NodeStates {
+public enum NodeState {
     SUCCESS,
     FAILURE,
-    RUNNING,
+    RUNNING
 }

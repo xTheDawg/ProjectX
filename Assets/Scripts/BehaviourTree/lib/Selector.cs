@@ -14,22 +14,22 @@ public abstract class Selector : Node {
     /* If any of the children reports a success, the selector will
      * immediately report a success upwards. If all children fail,
      * it will report a failure instead.*/
-    public override NodeStates Evaluate() {
+    public override NodeState Evaluate() {
         foreach (Node node in m_nodes) {
             switch (node.Evaluate()) {
-                case NodeStates.FAILURE:
+                case NodeState.FAILURE:
                     continue;
-                case NodeStates.SUCCESS:
-                    m_nodeState = NodeStates.SUCCESS;
+                case NodeState.SUCCESS:
+                    m_nodeState = NodeState.SUCCESS;
                     return m_nodeState;
-                case NodeStates.RUNNING:
-                    m_nodeState = NodeStates.RUNNING;
+                case NodeState.RUNNING:
+                    m_nodeState = NodeState.RUNNING;
                     return m_nodeState;
                 default:
                     continue;
             }
         }
-        m_nodeState = NodeStates.FAILURE;
+        m_nodeState = NodeState.FAILURE;
         return m_nodeState;
     }
 }

@@ -2,23 +2,23 @@
 
     /* Evaluates the node using the passed in delegate and 
      * reports the resulting state as appropriate */
-    public override NodeStates Evaluate() {
+    public override NodeState Evaluate() {
         switch (execute()) {
-            case NodeStates.SUCCESS:
-                m_nodeState = NodeStates.SUCCESS;
+            case NodeState.SUCCESS:
+                m_nodeState = NodeState.SUCCESS;
                 return m_nodeState;
-            case NodeStates.FAILURE:
-                m_nodeState = NodeStates.FAILURE;
+            case NodeState.FAILURE:
+                m_nodeState = NodeState.FAILURE;
                 return m_nodeState;
-            case NodeStates.RUNNING:
-                m_nodeState = NodeStates.RUNNING;
+            case NodeState.RUNNING:
+                m_nodeState = NodeState.RUNNING;
                 return m_nodeState;
             default:
-                m_nodeState = NodeStates.FAILURE;
+                m_nodeState = NodeState.FAILURE;
                 return m_nodeState;
         }
     }
 
-    public abstract NodeStates execute();
+    public abstract NodeState execute();
 
 }

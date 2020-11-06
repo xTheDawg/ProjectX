@@ -5,9 +5,9 @@ using UnityEngine;
 public class RestAction : ActionNode
 {
 
-    public override NodeStates execute()
+    public override NodeState execute()
     {
         Debug.Log("Executing Node: RestAction");
-        return NodeStates.SUCCESS;
+        return NodeState.SUCCESS;
     }
 }
