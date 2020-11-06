@@ -6,5 +6,7 @@ public class EnergySelector : Selector
 {
     public EnergySelector()
     {
+        m_nodes.Add(new CheckEnergyAction());
+        m_nodes.Add(new RestAction());
     }
 }
