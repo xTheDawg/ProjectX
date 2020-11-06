@@ -7,6 +7,6 @@ public class CheckEnergyAction : ActionNode
     public override NodeState execute()
     {
         Debug.Log("Executing Node: CheckEnergyAction");
-        return NodeState.SUCCESS;
+        return NodeState.FAILURE;
     }
 }

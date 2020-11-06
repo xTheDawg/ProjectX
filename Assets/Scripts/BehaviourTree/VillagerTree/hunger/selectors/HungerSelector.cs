@@ -1,6 +1,4 @@
-﻿using BehaviourTree.VillagerTree.hunger.selectors;
-
-public class HungerSelector : Selector
+﻿public class HungerSelector : Selector
 {
     public HungerSelector()
     {
