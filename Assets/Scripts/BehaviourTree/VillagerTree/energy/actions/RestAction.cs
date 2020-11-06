@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class RestAction : ActionNode
 {
-    public RestAction(ActionNodeDelegate action) : base(action)
+
+    public override NodeStates execute()
     {
+        Debug.Log("Executing Node: RestAction");
+        return NodeStates.SUCCESS;
     }
 }

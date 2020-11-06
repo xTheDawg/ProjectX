@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class CheckEnergyAction : ActionNode
 {
-    public CheckEnergyAction(ActionNodeDelegate action) : base(action)
+    public override NodeStates execute()
     {
+        Debug.Log("Executing Node: CheckEnergyAction");
+        return NodeStates.SUCCESS;
     }
 }
