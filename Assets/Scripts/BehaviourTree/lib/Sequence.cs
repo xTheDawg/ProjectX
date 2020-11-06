@@ -11,25 +11,25 @@ public abstract class Sequence : Node {
 
     /* If any child node returns a failure, the entire node fails. Whence all 
      * nodes return a success, the node reports a success. */
-    public override NodeStates Evaluate() {
+    public override NodeState Evaluate() {
         bool anyChildRunning = false;
         
         foreach(Node node in m_nodes) {
             switch (node.Evaluate()) {
-                case NodeStates.FAILURE:
-                    m_nodeState = NodeStates.FAILURE;
+                case NodeState.FAILURE:
+                    m_nodeState = NodeState.FAILURE;
                     return m_nodeState;                    
-                case NodeStates.SUCCESS:
+                case NodeState.SUCCESS:
                     continue;
-                case NodeStates.RUNNING:
+                case NodeState.RUNNING:
                     anyChildRunning = true;
                     continue;
                 default:
-                    m_nodeState = NodeStates.SUCCESS;
+                    m_nodeState = NodeState.SUCCESS;
                     return m_nodeState;
             }
         }
-        m_nodeState = anyChildRunning ? NodeStates.RUNNING : NodeStates.SUCCESS;
+        m_nodeState = anyChildRunning ? NodeState.RUNNING : NodeState.SUCCESS;
         return m_nodeState;
     }
 }

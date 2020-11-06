@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-public class PeasantMover : MonoBehaviour
+public class PeasantController : MonoBehaviour
 {
     private float speed;
     public float walkSpeed = 3f;

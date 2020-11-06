@@ -1140,7 +1140,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 452ab62743bc4d24c82bc3b9c480f3bb, type: 3}
+  m_Script: {fileID: 11500000, guid: efc83b8bc2acb8840a2228656d99a93a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 963194228}
@@ -2392,7 +2392,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2001169203}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68103f18b778dd84abfe9f16cb3d2d4d, type: 3}
+  m_Script: {fileID: 11500000, guid: 23cefbd8a56d5a5449090332e46ad1b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 5
