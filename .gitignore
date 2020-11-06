@@ -53,6 +53,9 @@ ExportedObj/
 *.opendb
 *.VC.db
 
+#Unity3D unrelated folders
+/[Aa]ssets/Plugins/
+
 # Unity3D generated meta files
 *.pidb.meta
 *.pdb.meta
