@@ -2,8 +2,8 @@
 {
     public RootSequence()
     {
-        m_nodes.Add(new EnergySelector());
-        m_nodes.Add(new HungerSelector());
-        m_nodes.Add(new WorkSelector());
+        nodes.Add(new EnergySelector());
+        nodes.Add(new HungerSelector());
+        nodes.Add(new WorkSelector());
     }
 }

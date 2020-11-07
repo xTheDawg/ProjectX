@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CheckJobListAction : ActionNode
 {
 
-    public override NodeState execute()
+    public override NodeState Execute()
     {
         Debug.Log("Executing Node: CheckJobListAction");
         return NodeState.SUCCESS;

@@ -2,6 +2,6 @@
 {
     public DoJobInverter()
     {
-        m_node = new DoJobAction();
+        node = new DoJobAction();
     }
 }

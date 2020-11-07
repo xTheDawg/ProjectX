@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CheckHungerBarAction : ActionNode
 {
 
-    public override NodeState execute()
+    public override NodeState Execute()
     {
         Debug.Log("Executing Node: CheckHungerBarAction");
         return NodeState.SUCCESS;
