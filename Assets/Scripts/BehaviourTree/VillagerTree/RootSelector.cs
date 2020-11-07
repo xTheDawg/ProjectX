@@ -1,6 +1,6 @@
-﻿public class RootSelector : Selector
+﻿public class RootSequence : Sequence
 {
-    public RootSelector()
+    public RootSequence()
     {
         m_nodes.Add(new EnergySelector());
         m_nodes.Add(new HungerSelector());

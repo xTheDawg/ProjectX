@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public abstract class Sequence : Node {
     /** Chiildren nodes that belong to this sequence */
-    private List<Node> m_nodes = new List<Node>();
+    protected List<Node> m_nodes = new List<Node>();
 
     /** Must provide an initial set of children nodes to work */
     public Sequence() {}

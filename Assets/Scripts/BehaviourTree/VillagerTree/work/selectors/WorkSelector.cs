@@ -6,5 +6,7 @@ public class WorkSelector : Selector
 {
     public WorkSelector()
     {
+        m_nodes.Add(new PickJobSequence());
+        m_nodes.Add(new AddJobSelector());
     }
 }

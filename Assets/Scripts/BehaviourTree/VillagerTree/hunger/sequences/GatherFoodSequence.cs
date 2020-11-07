@@ -4,4 +4,8 @@ using UnityEngine;
 
 public class GatherFoodSequence : Sequence
 {
+    public GatherFoodSequence() {
+            m_nodes.Add(new RequestFoodAction());
+            m_nodes.Add(new DoJobInverter());            
+    }
 }

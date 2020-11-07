@@ -8,7 +8,7 @@ public class Init : MonoBehaviour
     void Start()
     {
         Debug.Log("Test");
-        RootSelector rs = new RootSelector();
+        RootSequence rs = new RootSequence();
         rs.Evaluate();
     }
 
@@ -18,3 +18,5 @@ public class Init : MonoBehaviour
         
     }
 }
+
+

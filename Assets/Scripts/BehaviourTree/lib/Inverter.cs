@@ -3,17 +3,11 @@ using System.Collections;
 
 public class Inverter : Node {
     /* Child node to evaluate */
-    private Node m_node;
-
-    public Node node {
-        get { return m_node; }
-    }
+    protected Node m_node;
 
     /* The constructor requires the child node that this inverter  decorator
      * wraps*/
-    public Inverter(Node node) {
-        m_node = node;
-    }
+    public Inverter() {}
 
     /* Reports a success if the child fails and
      * a failure if the child succeeeds. Running will report
