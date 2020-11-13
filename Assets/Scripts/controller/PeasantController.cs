@@ -10,14 +10,12 @@ public class PeasantController : MonoBehaviour
     public Quaternion playerRot;
     private float rotSpeed = 5f;
     private bool moving = false;
-    
-    Rigidbody rigidbody;
+
     Animator animator;
     CapsuleCollider capsuleCollider;
 
     private void Start()
     {
-        rigidbody = gameObject.GetComponent<Rigidbody>();
         animator = gameObject.GetComponent<Animator>();
         capsuleCollider = gameObject.GetComponent<CapsuleCollider>();
     }

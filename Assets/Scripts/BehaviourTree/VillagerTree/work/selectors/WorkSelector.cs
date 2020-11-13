@@ -2,7 +2,7 @@
 {
     public WorkSelector()
     {
-        nodes.Add(new PickJobSequence());
-        nodes.Add(new AddJobSelector());
+        AddChild(new PickJobSequence());
+        AddChild(new AddJobSelector());
     }
 }

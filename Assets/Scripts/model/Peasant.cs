@@ -1,11 +1,19 @@
 ﻿public class Peasant {
-    private int foodLevel {get; set;}
-    private int energyLevel {get; set;}
-    private int inventoryCapacity {get; set;}
+    public int foodLevel {get; set;}
+    public int energyLevel {get; set;}
+    public int inventoryCapacity {get; set;}
 
-    public Peasant() {
-        this.foodLevel = 100;
-        this.energyLevel = 100;
-        this.inventoryCapacity = 10;
+    public RootSequence root {get; set;}
+
+    public Peasant(int foodLevel, int energyLevel, int inventoryCapacity) {
+        this.foodLevel = foodLevel;
+        this.energyLevel = energyLevel;
+        this.inventoryCapacity = inventoryCapacity;
+
+        root = new RootSequence(this);
+    }
+
+    public void Work() {
+        root.Evaluate();
     }
 }
