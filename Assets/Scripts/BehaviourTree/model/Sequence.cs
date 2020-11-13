@@ -29,4 +29,9 @@ public abstract class Sequence : Node {
         nodeState = anyChildRunning ? NodeState.RUNNING : NodeState.SUCCESS;
         return nodeState;
     }
+
+    public void AddChild(Node child) {
+        this.nodes.Add(child);
+        child.parent = this;
+    }
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Inverter : Node {
+public abstract class Inverter : Node {
     // Child node whose result is inverted
     protected Node node;
 

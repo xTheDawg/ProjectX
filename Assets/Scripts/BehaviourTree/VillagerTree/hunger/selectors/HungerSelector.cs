@@ -2,7 +2,7 @@
 {
     public HungerSelector()
     {
-        nodes.Add(new CheckHungerBarAction());
-        nodes.Add(new ReplenishHungerSelector());
+        AddChild(new CheckHungerBarAction());
+        AddChild(new ReplenishHungerSelector());
     }
 }

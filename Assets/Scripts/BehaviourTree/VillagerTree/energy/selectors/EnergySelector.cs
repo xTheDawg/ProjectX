@@ -2,7 +2,7 @@
 {
     public EnergySelector()
     {
-        nodes.Add(new CheckEnergyAction());
-        nodes.Add(new RestAction());
+        AddChild(new CheckEnergyAction());
+        AddChild(new RestAction());
     }
 }

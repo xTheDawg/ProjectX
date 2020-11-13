@@ -25,4 +25,9 @@ public abstract class Selector : Node {
         nodeState = NodeState.FAILURE;
         return nodeState;
     }
+
+    public void AddChild(Node child) {
+        this.nodes.Add(child);
+        child.parent = this;
+    }
 }
