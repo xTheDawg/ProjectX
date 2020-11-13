@@ -8,62 +8,52 @@ public class TreeController : MonoBehaviour
 {
     private GameObject tree;
     private int treeWood;
-    private Color regularColor;
-    private Color alphaColor;
-    private float timeToFade = 2.0f;
     private float timeToReset = 10.0f;
-    private Collider collider;
+    private CapsuleCollider collider = new CapsuleCollider();
+    private MeshRenderer renderer = new MeshRenderer();
     
     // Start is called before the first frame update
     void Start()
     {
         tree = this.gameObject;
         treeWood = Random.Range(5, 10);
-        regularColor = alphaColor = tree.GetComponent<MeshRenderer>().material.color;
-        alphaColor.a = 0;
         collider = tree.GetComponent<CapsuleCollider>();
-        setWood(-10);
+        renderer = tree.GetComponent<MeshRenderer>();
+        SetWood(-10);
     }
 
     // Update is called once per frame
-    public IEnumerable resetTree()
+    public IEnumerator Wait()
     {
         yield return new WaitForSeconds(timeToReset);
-        fadeIn();
-        Debug.Log("Function resetTree has been executed.");
-    }
-    
-    private void fadeIn()
-    {
-        tree.GetComponent<MeshRenderer>().material.color = Color.Lerp(tree.GetComponent<MeshRenderer>().material.color,
-            regularColor, timeToFade * Time.deltaTime);
+        Debug.Log("Waited " + timeToReset + " seconds!");
+        renderer.enabled = true;
         collider.enabled = true;
         treeWood = Random.Range(5, 10);
-        Debug.Log("Function fadeIn has been executed.");
+        Debug.Log("Tree has been activated and contains " + treeWood + " Wood!");
     }
     
-    private void fadeOut()
+    private void ResetTree()
     {
-        tree.GetComponent<MeshRenderer>().material.color = Color.Lerp(tree.GetComponent<MeshRenderer>().material.color,
-            alphaColor, timeToFade * Time.deltaTime);
+        renderer.enabled = false;
         collider.enabled = false;
-        resetTree();
-        Debug.Log("Function fadeOut has been executed.");
+        StartCoroutine(Wait());
+        Debug.Log("Tree has been deactivated!");
     }
-    
-    public int getWood()
+
+    public int GetWood()
     {
         Debug.Log("Function getWood has been executed.");
         return treeWood;
     }
     
-    public void setWood(int amount)
+    public void SetWood(int amount)
     {
         treeWood += amount;
         if (treeWood <= 0)
         {
             treeWood = 0;
-            fadeOut();
+            ResetTree();
         }
         Debug.Log("Function setWood has been executed.");
     }
