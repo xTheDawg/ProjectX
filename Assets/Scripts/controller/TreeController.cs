@@ -26,11 +26,9 @@ public class TreeController : MonoBehaviour
     public IEnumerator Wait()
     {
         yield return new WaitForSeconds(timeToReset);
-        Debug.Log("Waited " + timeToReset + " seconds!");
         renderer.enabled = true;
         collider.enabled = true;
         treeWood = Random.Range(5, 10);
-        Debug.Log("Tree has been activated and contains " + treeWood + " Wood!");
     }
     
     private void ResetTree()
@@ -38,12 +36,10 @@ public class TreeController : MonoBehaviour
         renderer.enabled = false;
         collider.enabled = false;
         StartCoroutine(Wait());
-        Debug.Log("Tree has been deactivated!");
     }
 
     public int GetWood()
     {
-        Debug.Log("Function getWood has been executed.");
         return treeWood;
     }
     
@@ -55,6 +51,5 @@ public class TreeController : MonoBehaviour
             treeWood = 0;
             ResetTree();
         }
-        Debug.Log("Function setWood has been executed.");
     }
 }
