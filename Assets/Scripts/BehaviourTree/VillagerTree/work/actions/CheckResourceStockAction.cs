@@ -5,7 +5,7 @@ public class CheckResourceStockAction : ActionNode
 
     public override NodeState Execute()
     {
-        Debug.Log("Executing Node: CheckResourceStockAction");
+        //Debug.Log("Executing Node: CheckResourceStockAction");
         return NodeState.SUCCESS;
     }
 }

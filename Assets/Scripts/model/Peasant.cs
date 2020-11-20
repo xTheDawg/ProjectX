@@ -5,12 +5,12 @@ public class Peasant : MonoBehaviour
 {
     private float walkSpeed = 2f;
     private float rotSpeed = 5f;
+    private float fatigueTimer = 0f;
     private int foodLevel {get; set;}
     private int maxFoodLevel = 100;
     private int energyLevel {get; set;}
     private int maxEnergyLevel = 100;
     public int inventoryCapacity {get; set;}
-    private bool activeTask = false;
     private Animator animator;
     private Quaternion rotation;
     public RootSequence root;
@@ -19,19 +19,26 @@ public class Peasant : MonoBehaviour
     {
         root = new RootSequence(this);
         foodLevel = 100;
-        energyLevel = 15;
+        energyLevel = 45;
         inventoryCapacity = 100;
         animator = gameObject.GetComponent<Animator>();
         Work();
     }
 
-    /*private void Update()
+    private void Update()
     {
-        if (activeTask == false)
+        fatigueTimer += Time.deltaTime;
+        if (fatigueTimer > 2f)
         {
-            Work();
+            fatigueTimer = fatigueTimer - 2f;
+            if (!animator.GetBool("isResting"))
+            {
+                SetEnergylevel(GetEnergyLevel() - 10);
+                Debug.Log("Energy Level is now: " + GetEnergyLevel());
+            }
         }
-    }*/
+        Work();
+    }
 
     public void Work() {
         root.Evaluate();
@@ -61,17 +68,7 @@ public class Peasant : MonoBehaviour
     {
         return maxEnergyLevel;
     }
-    
-    public bool GetActiveTask()
-    {
-        return activeTask;
-    }
-    
-    public void SetActiveTask(bool state)
-    {
-        activeTask = state;
-    }
-    
+
     public Animator GetAnimator()
     {
         return animator;
@@ -87,12 +84,8 @@ public class Peasant : MonoBehaviour
         rotation = Quaternion.LookRotation(direction);
     }
 
-    public void AddEnergylevel(int amount)
+    public void SetEnergylevel(int amount)
     {
-        energyLevel += amount;
-        if (energyLevel > maxEnergyLevel)
-        {
-            energyLevel = maxEnergyLevel;
-        }
+        energyLevel = amount;
     }
 }

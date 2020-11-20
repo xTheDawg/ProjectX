@@ -8,6 +8,10 @@ public abstract class Node {
     // Used to evaluate the tree
     public abstract NodeState Evaluate();
 
+    public NodeState GetNodeState()
+    {
+        return nodeState;
+    }
 
     // Invoke Get Peasant method of parent node until root node is reached
      public virtual Peasant GetPeasant() {

@@ -3,29 +3,28 @@ using UnityEngine;
 
 public class RestAction : ActionNode
 {
+    private bool isRegenerating = false;
+    private float restStartTime;
 
     public override NodeState Execute()
     {
-        GetPeasant().GetAnimator().SetBool("isWalking", false);
-        Debug.Log("Setting walking to false");
-        GetPeasant().GetAnimator().SetBool("isResting", true);
-        Debug.Log("Setting resting to true");
-        GetPeasant().StartCoroutine(RegenerateEnergy());
-        Debug.Log("Executing Node: RestAction");
-        return GetPeasant().GetEnergyLevel() == GetPeasant().GetMaxEnergyLevel() ? NodeState.SUCCESS : NodeState.FAILURE;
-    }
-    
-    private IEnumerator RegenerateEnergy() {
-        GetPeasant().SetActiveTask(true);
-        WaitForSeconds wait = new WaitForSeconds(0.1f);
-        while (GetPeasant().GetEnergyLevel() < GetPeasant().GetMaxEnergyLevel())
+        if (!isRegenerating)
         {
-            GetPeasant().AddEnergylevel(1);
-            yield return wait;
-            Debug.Log("The Peasants Energy Level is at: " + GetPeasant().GetEnergyLevel());
+            isRegenerating = true;
+            restStartTime = Time.time;
+            GetPeasant().GetAnimator().SetBool("isWalking", false);
+            GetPeasant().GetAnimator().SetBool("isResting", true);
         }
-        GetPeasant().GetAnimator().SetBool("isResting", false);
-        GetPeasant().SetActiveTask(false);
-        Debug.Log("Setting resting to false");
+
+        if (Time.time - restStartTime > 5f)
+        {
+            GetPeasant().SetEnergylevel(GetPeasant().GetMaxEnergyLevel());
+            GetPeasant().GetAnimator().SetBool("isResting", false);
+            isRegenerating = false;
+            Debug.Log("Resting complete! Energy Level is now at: " + GetPeasant().GetEnergyLevel());
+            return NodeState.SUCCESS;
+        }
+
+        return NodeState.RUNNING;
     }
 }
