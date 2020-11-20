@@ -3,7 +3,6 @@
 
 public class PeasantController : MonoBehaviour
 {
-    private float speed;
     public float walkSpeed = 3f;
     public Vector3 targetPosition;
     public Vector3 lookAtTarget;

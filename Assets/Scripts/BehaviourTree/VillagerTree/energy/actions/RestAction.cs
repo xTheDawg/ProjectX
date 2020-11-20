@@ -16,6 +16,7 @@ public class RestAction : ActionNode
     }
     
     private IEnumerator RegenerateEnergy() {
+        GetPeasant().SetActiveTask(true);
         WaitForSeconds wait = new WaitForSeconds(0.1f);
         while (GetPeasant().GetEnergyLevel() < GetPeasant().GetMaxEnergyLevel())
         {
@@ -24,6 +25,7 @@ public class RestAction : ActionNode
             Debug.Log("The Peasants Energy Level is at: " + GetPeasant().GetEnergyLevel());
         }
         GetPeasant().GetAnimator().SetBool("isResting", false);
+        GetPeasant().SetActiveTask(false);
         Debug.Log("Setting resting to false");
     }
 }

@@ -19,7 +19,6 @@ public class TreeController : MonoBehaviour
         treeWood = Random.Range(5, 10);
         collider = tree.GetComponent<CapsuleCollider>();
         renderer = tree.GetComponent<MeshRenderer>();
-        SetWood(-10);
     }
 
     // Update is called once per frame
