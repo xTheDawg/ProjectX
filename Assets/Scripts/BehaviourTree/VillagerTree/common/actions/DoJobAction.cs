@@ -7,7 +7,7 @@ public class DoJobAction : ActionNode
     private MovementController movementController = new MovementController();
     public override NodeState Execute()
     {
-        if (!hasTarget)
+        /*if (!hasTarget)
         {
             target = movementController.FindClosestTarget(GetPeasant());
             hasTarget = true;
@@ -20,7 +20,7 @@ public class DoJobAction : ActionNode
             movementController.Move(GetPeasant(), target);
             hasTarget = false;
             return NodeState.RUNNING;
-        }
+        }*/
         //Debug.Log("Executing Node: DoJobAction");
         return NodeState.SUCCESS;
     }
