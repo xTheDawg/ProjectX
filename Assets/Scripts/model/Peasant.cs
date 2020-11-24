@@ -3,17 +3,17 @@ using UnityEngine;
 
 public class Peasant : MonoBehaviour
 {
-    private float walkSpeed = 2f;
-    private float rotSpeed = 5f;
-    private float fatigueTimer = 0f;
-    private int foodLevel {get; set;}
-    private int maxFoodLevel = 100;
-    private int energyLevel {get; set;}
-    private int maxEnergyLevel = 100;
+    public float walkSpeed {get; set;} = 2f;
+    public float rotSpeed {get; set;} = 5f;
+    public float fatigueTimer {get; set;} = 0f;
+    public int foodLevel {get; set;}
+    public int maxFoodLevel {get; set;} = 100;
+    public int energyLevel {get; set;}
+    public int maxEnergyLevel {get; set;} = 100;
     public int inventoryCapacity {get; set;}
-    private Animator animator;
-    private Quaternion rotation;
-    public RootSequence root;
+    public Animator animator {get; set;}
+    public Quaternion rotation {get; set;}
+    public RootSequence root {get; set;}
 
     private void Start()
     {
@@ -33,59 +33,23 @@ public class Peasant : MonoBehaviour
             fatigueTimer = fatigueTimer - 2f;
             if (!animator.GetBool("isResting"))
             {
-                SetEnergylevel(GetEnergyLevel() - 10);
-                Debug.Log("Energy Level is now: " + GetEnergyLevel());
+                this.energyLevel = energyLevel - 10;
+                Debug.Log("Energy Level is now: " + energyLevel);
             }
         }
-        Work();
+        Work();        
+    }
+
+    private void OnCollisionEnter(Collision collision) {
+        Debug.Log("collided");
     }
 
     public void Work() {
         root.Evaluate();
-    }
-    
-    public float GetWalkSpeed()
-    {
-        return walkSpeed;
-    }
-    
-    public float GetRotSpeed()
-    {
-        return rotSpeed;
-    }
-    
-    public int GetEnergyLevel()
-    {
-        return energyLevel;
-    }
-    
-    public int GetMaxFoodlevel()
-    {
-        return maxFoodLevel;
-    }
-    
-    public int GetMaxEnergyLevel()
-    {
-        return maxEnergyLevel;
-    }
-
-    public Animator GetAnimator()
-    {
-        return animator;
-    }
-    
-    public Quaternion GetRotation()
-    {
-        return rotation;
-    }
-    
+    }    
+   
     public void SetRotation(Vector3 direction)
     {
         rotation = Quaternion.LookRotation(direction);
-    }
-
-    public void SetEnergylevel(int amount)
-    {
-        energyLevel = amount;
     }
 }

@@ -7,8 +7,10 @@ public class DoJobAction : ActionNode
     private MovementController movementController = new MovementController();
     public override NodeState Execute()
     {
+        // TODO: I think this should be moved to a method in movement controller.
+
         if (!hasTarget) {
-            target = movementController.FindClosestTree(GetPeasant());
+            target = movementController.FindClosestResource(GetPeasant(), ResourceType.WOOD);
             hasTarget = true;
         }
 
@@ -16,8 +18,8 @@ public class DoJobAction : ActionNode
         bool arrivedAtTarget = Vector3.Distance(GetPeasant().transform.position, target) < 2;
 
         // Set animations accordingly
-        GetPeasant().GetAnimator().SetBool("isWalking", !arrivedAtTarget);
-        GetPeasant().GetAnimator().SetBool("isResting", arrivedAtTarget);
+        GetPeasant().animator.SetBool("isWalking", !arrivedAtTarget);
+        // GetPeasant().animator.SetBool("isResting", arrivedAtTarget);
 
         if (!arrivedAtTarget) {
             // Keep moving

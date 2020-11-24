@@ -5,27 +5,50 @@ using UnityEngine;
 
 public class MovementController
 {
-    private float distanceToClosestTarget = Mathf.Infinity;
-    private TreeController[] allTrees = GameObject.FindObjectsOfType<TreeController>();
+    private float distanceToClosestResource = Mathf.Infinity;
+    private TreeController[] allTreeResources = GameObject.FindObjectsOfType<TreeController>();
+
+    // private StoneController[] allStoneResources = GameObject.FindObjectsOfType<StoneController>();
+
+    // private FoodController[] allFoodResources = GameObject.FindObjectsOfType<FoodController>();
+
+    private MonoBehaviour[] allResourcesOfType;
+
     private Vector3 targetPosition;
     
-    // Find the tree that is closest to the peasant.
-    public Vector3 FindClosestTree(Peasant peasant)
+    // Find the closest resource of a specific type that is closest to the peasant.
+    public Vector3 FindClosestResource(Peasant peasant, ResourceType resourceType)
     {
-        TreeController closestTree = null;
-        foreach (TreeController currentTree in allTrees)
+        MonoBehaviour closestResource = null;
+
+        switch(resourceType) {
+            case ResourceType.WOOD:
+                allResourcesOfType = allTreeResources;
+                break;
+            /*
+            case ResourceType.STONE:
+                allResourcesOfType = allStoneResources;
+                break;
+            case ResourceType.FOOD:
+                allResourcesOfType = allFoodResources;
+                break;*/
+            default:
+                break;
+        }
+
+        foreach (MonoBehaviour resource in allResourcesOfType)
         {
-            float distanceToTree = Vector3.Distance(currentTree.transform.position, peasant.transform.position);
+            float distanceToResource = Vector3.Distance(resource.transform.position, peasant.transform.position);
             
-            if (distanceToTree < distanceToClosestTarget)
+            if (distanceToResource < distanceToClosestResource)
             {
-                distanceToClosestTarget = distanceToTree;
-                closestTree = currentTree;
+                distanceToClosestResource = distanceToResource;
+                closestResource = resource;
             }
         }
 
-        // Return position of closest tree
-        return closestTree.transform.position;
+        // Return position of closest resource
+        return closestResource.transform.position;
     }
     
     // Moves the tiven peasant towards the target location.
@@ -37,12 +60,12 @@ public class MovementController
 
         // Set rotation to make sure peasant looks at target.
         peasant.transform.rotation = Quaternion.Slerp(peasant.transform.rotation,
-            peasant.GetRotation(),
-            peasant.GetRotSpeed() * Time.deltaTime);
+            peasant.rotation,
+            peasant.rotSpeed * Time.deltaTime);
 
         // Move towards target
         peasant.transform.position = Vector3.MoveTowards(peasant.transform.position,
             target,
-            peasant.GetWalkSpeed() * Time.deltaTime);
+            peasant.walkSpeed * Time.deltaTime);
     }
 }

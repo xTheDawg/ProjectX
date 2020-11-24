@@ -6,6 +6,6 @@ public class CheckEnergyAction : ActionNode
     {        
         //Debug.Log("Executing Node: CheckEnergyAction");
         // Return success if peasant energyLevel is above 20.
-        return GetPeasant().GetEnergyLevel() >= 20 ? NodeState.SUCCESS : NodeState.FAILURE;
+        return GetPeasant().energyLevel >= 20 ? NodeState.SUCCESS : NodeState.FAILURE;
     }
 }

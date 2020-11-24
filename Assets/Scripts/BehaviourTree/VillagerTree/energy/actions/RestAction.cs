@@ -12,16 +12,16 @@ public class RestAction : ActionNode
         {
             isRegenerating = true;
             restStartTime = Time.time;
-            GetPeasant().GetAnimator().SetBool("isWalking", false);
-            GetPeasant().GetAnimator().SetBool("isResting", true);
+            GetPeasant().animator.SetBool("isWalking", false);
+            GetPeasant().animator.SetBool("isResting", true);
         }
 
         if (Time.time - restStartTime > 5f)
         {
-            GetPeasant().SetEnergylevel(GetPeasant().GetMaxEnergyLevel());
-            GetPeasant().GetAnimator().SetBool("isResting", false);
+            GetPeasant().energyLevel = GetPeasant().maxEnergyLevel;
+            GetPeasant().animator.SetBool("isResting", false);
             isRegenerating = false;
-            Debug.Log("Resting complete! Energy Level is now at: " + GetPeasant().GetEnergyLevel());
+            Debug.Log("Resting complete! Energy Level is now at: " + GetPeasant().energyLevel);
             return NodeState.SUCCESS;
         }
 
