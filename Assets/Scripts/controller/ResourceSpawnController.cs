@@ -7,9 +7,13 @@ public class ResourceSpawnController : MonoBehaviour
     public GameObject treePrefab;
 
     public GameObject stonePrefab;
+
     // Start is called before the first frame update
     void Start()
     {
+        treePrefab = Resources.Load("PT_Medieval_Tree_1") as GameObject;
+        stonePrefab = Resources.Load("PT_Medieval_Rock_6") as GameObject;
+
         for (int i = 0; i < 100; i++)
         {
             spawnResources(treePrefab);
