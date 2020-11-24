@@ -12,7 +12,7 @@ public class Peasant : MonoBehaviour
     public int maxEnergyLevel {get; set;} = 100;
     public int inventoryCapacity {get; set;}
     public Animator animator {get; set;}
-    public Quaternion rotation {get; set;}
+    public Vector3 rotation {get; set;}
     public RootSequence root {get; set;}
 
     private void Start()
@@ -40,16 +40,24 @@ public class Peasant : MonoBehaviour
         Work();        
     }
 
-    private void OnCollisionEnter(Collision collision) {
-        Debug.Log("collided");
-    }
-
     public void Work() {
         root.Evaluate();
-    }    
-   
-    public void SetRotation(Vector3 direction)
-    {
-        rotation = Quaternion.LookRotation(direction);
+    }
+
+
+    public void GoToLocation(Vector3 location) {
+        // Calculate looking direction of peasant
+        this.rotation = new Vector3(location.x - this.transform.position.x,
+            this.transform.position.y, location.z - this.transform.position.z);
+
+        // Set rotation to make sure peasant looks at location.
+        this.transform.rotation = Quaternion.Slerp(this.transform.rotation,
+            Quaternion.LookRotation(this.rotation),
+            this.rotSpeed * Time.deltaTime);
+
+        // Move towards target
+        this.transform.position = Vector3.MoveTowards(this.transform.position,
+            location,
+            this.walkSpeed * Time.deltaTime);
     }
 }

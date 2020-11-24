@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementController
+public class ResourceHelper
 {
     private float distanceToClosestResource = Mathf.Infinity;
     private TreeController[] allTreeResources = GameObject.FindObjectsOfType<TreeController>();
@@ -49,23 +49,5 @@ public class MovementController
 
         // Return position of closest resource
         return closestResource.transform.position;
-    }
-    
-    // Moves the tiven peasant towards the target location.
-    public void Move(Peasant peasant, Vector3 target)
-    {
-        // Calculate looking direction of peasant
-        peasant.SetRotation(new Vector3(target.x - peasant.transform.position.x, 
-            peasant.transform.position.y, target.z - peasant.transform.position.z));
-
-        // Set rotation to make sure peasant looks at target.
-        peasant.transform.rotation = Quaternion.Slerp(peasant.transform.rotation,
-            peasant.rotation,
-            peasant.rotSpeed * Time.deltaTime);
-
-        // Move towards target
-        peasant.transform.position = Vector3.MoveTowards(peasant.transform.position,
-            target,
-            peasant.walkSpeed * Time.deltaTime);
     }
 }
