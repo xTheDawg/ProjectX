@@ -12,7 +12,7 @@ public class ResourceHelper
 
     // private FoodController[] allFoodResources = GameObject.FindObjectsOfType<FoodController>();
 
-    private MonoBehaviour[] allResourcesOfType;
+    private ResourceController[] allResourcesOfType;
 
     private Vector3 targetPosition;
     
@@ -36,7 +36,7 @@ public class ResourceHelper
                 break;
         }
 
-        foreach (MonoBehaviour resource in allResourcesOfType)
+        foreach (ResourceController resource in allResourcesOfType)
         {
             float distanceToResource = Vector3.Distance(resource.transform.position, peasant.transform.position);
             

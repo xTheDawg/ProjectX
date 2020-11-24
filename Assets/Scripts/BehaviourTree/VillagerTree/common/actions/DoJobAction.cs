@@ -8,7 +8,6 @@ public class DoJobAction : ActionNode
     public override NodeState Execute()
     {
         // TODO: I think this should be moved to a method in movement controller.
-
         if (!hasTarget) {
             target = resourceHelper.FindClosestResource(GetPeasant(), ResourceType.WOOD);
             hasTarget = true;

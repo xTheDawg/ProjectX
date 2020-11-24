@@ -12,7 +12,9 @@ public class ResourceSpawnController : MonoBehaviour
     void Start()
     {
         treePrefab = Resources.Load("PT_Medieval_Tree_1") as GameObject;
+        treePrefab.AddComponent<TreeController>();
         stonePrefab = Resources.Load("PT_Medieval_Rock_6") as GameObject;
+        stonePrefab.AddComponent<StoneController>();
 
         for (int i = 0; i < 100; i++)
         {

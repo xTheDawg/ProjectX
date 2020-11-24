@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-
-public class PeasantController : MonoBehaviour
+// Deprecated
+public class DeprecatedMoveToCursor : MonoBehaviour
 {
     public float walkSpeed = 3f;
     public Vector3 targetPosition;
