@@ -7,21 +7,25 @@ public class DoJobAction : ActionNode
     private MovementController movementController = new MovementController();
     public override NodeState Execute()
     {
-        /*if (!hasTarget)
-        {
-            target = movementController.FindClosestTarget(GetPeasant());
+        if (!hasTarget) {
+            target = movementController.FindClosestTree(GetPeasant());
             hasTarget = true;
-            GetPeasant().GetAnimator().SetBool("isWalking", true);
-            GetPeasant().GetAnimator().SetBool("isResting", false);
         }
 
-        if (GetPeasant().transform.position != target)
-        {
+        // Check if peasant is at target location
+        bool arrivedAtTarget = Vector3.Distance(GetPeasant().transform.position, target) < 2;
+
+        // Set animations accordingly
+        GetPeasant().GetAnimator().SetBool("isWalking", !arrivedAtTarget);
+        GetPeasant().GetAnimator().SetBool("isResting", arrivedAtTarget);
+
+        if (!arrivedAtTarget) {
+            // Keep moving
             movementController.Move(GetPeasant(), target);
-            hasTarget = false;
             return NodeState.RUNNING;
-        }*/
-        //Debug.Log("Executing Node: DoJobAction");
-        return NodeState.SUCCESS;
+        } else {
+            // Return success if arrived at target
+            return NodeState.SUCCESS;
+        }  
     }
 }
