@@ -31,10 +31,11 @@ public class Peasant : MonoBehaviour
         if (fatigueTimer > 2f)
         {
             fatigueTimer = fatigueTimer - 2f;
-            if (!animator.GetBool("isResting"))
+            if (!animator.GetBool("isResting") && !animator.GetBool("isEating"))
             {
                 this.energyLevel = energyLevel - 10;
-                Debug.Log("Energy Level is now: " + energyLevel);
+                this.foodLevel = foodLevel - 7;
+                Debug.Log("Energy Level: " + energyLevel + " Food level: " + foodLevel);
             }
         }
         Work();        

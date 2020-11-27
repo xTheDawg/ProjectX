@@ -11,9 +11,19 @@ public class EatAction : ActionNode
         {
             isEating = true;
             eatStartTime = Time.time;
-            
+            GetPeasant().animator.SetBool("isWalking", false);
+            GetPeasant().animator.SetBool("isEating", true);
         }
-        Debug.Log("Executing Node: EatAction");
-        return NodeState.SUCCESS;
+        
+        if (Time.time - eatStartTime > 5f)
+        {
+            GetPeasant().foodLevel = GetPeasant().maxFoodLevel;
+            GetPeasant().animator.SetBool("isEating", false);
+            isEating = false;
+            Debug.Log("Eating complete! Food Level is now at: " + GetPeasant().foodLevel);
+            return NodeState.SUCCESS;
+        }
+        
+        return NodeState.RUNNING;
     }
 }
