@@ -18,7 +18,7 @@ public abstract class Sequence : Node {
                 switch (node.Evaluate()) {
                     case NodeState.FAILURE:
                         nodeState = NodeState.FAILURE;
-                        return nodeState;                    
+                        return nodeState;
                     case NodeState.SUCCESS:
                         continue;
                     case NodeState.RUNNING:
