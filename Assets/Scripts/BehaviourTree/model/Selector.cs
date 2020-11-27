@@ -9,6 +9,7 @@ public abstract class Selector : Node {
     // Evaluate all child nodes. Only return FAILURE, when all child nodes failed
     public override NodeState Evaluate()
     {
+        bool anyChildRunning = false;
         foreach (Node node in nodes)
         {
             if (node.GetNodeState() == NodeState.RUNNING)
@@ -21,24 +22,29 @@ public abstract class Selector : Node {
                         return nodeState;
                     case NodeState.RUNNING:
                         nodeState = NodeState.RUNNING;
+                        anyChildRunning = true;
                         return nodeState;
                     default:
                         continue;
                 }
             }
         }
-        foreach (Node node in nodes) {
-            switch (node.Evaluate()) {
-                case NodeState.FAILURE:
-                    continue;
-                case NodeState.SUCCESS:
-                    nodeState = NodeState.SUCCESS;
-                    return nodeState;
-                case NodeState.RUNNING:
-                    nodeState = NodeState.RUNNING;
-                    return nodeState;
-                default:
-                    continue;
+
+        if (!anyChildRunning)
+        {
+            foreach (Node node in nodes) {
+                switch (node.Evaluate()) {
+                    case NodeState.FAILURE:
+                        continue;
+                    case NodeState.SUCCESS:
+                        nodeState = NodeState.SUCCESS;
+                        return nodeState;
+                    case NodeState.RUNNING:
+                        nodeState = NodeState.RUNNING;
+                        return nodeState;
+                    default:
+                        continue;
+                }
             }
         }
         nodeState = NodeState.FAILURE;
