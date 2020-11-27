@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class Peasant : MonoBehaviour
 {
-    public float walkSpeed {get; set;} = 2f;
+    public float walkSpeed {get; set;} = Globals.walkSpeed;
     public float rotSpeed {get; set;} = 5f;
     public float fatigueTimer {get; set;} = 0f;
-    public int foodLevel {get; set;}
-    public int maxFoodLevel {get; set;} = 100;
-    public int energyLevel {get; set;}
-    public int maxEnergyLevel {get; set;} = 100;
-    public int inventoryCapacity {get; set;}
+    public int foodLevel {get; set;} = Globals.foodGameStart;
+    public int maxFoodLevel {get; set;} = Globals.foodMax;
+    public int energyLevel {get; set;} = Globals.energyGameStart;
+    public int maxEnergyLevel {get; set;} = Globals.energyMax;
+    public int inventoryCapacity {get; set;} = Globals.inventoryCapacity;
     public Animator animator {get; set;}
     public Vector3 rotation {get; set;}
     public RootSequence root {get; set;}
@@ -18,9 +18,6 @@ public class Peasant : MonoBehaviour
     private void Start()
     {
         root = new RootSequence(this);
-        foodLevel = 100;
-        energyLevel = 45;
-        inventoryCapacity = 100;
         animator = gameObject.GetComponent<Animator>();
         Work();
     }

@@ -1,0 +1,24 @@
+﻿using UnityEngine;
+public static class Globals {
+
+    // Peasant
+    public static int foodMax {get; set;} = 100;
+    public static int foodCritical {get; set;} = 20;
+    public static int foodGameStart {get; set;} = 15;
+    public static int eatAmount {get; set;} = 80;
+    public static int energyMax {get; set;} = 100;
+    public static int energyCritical {get; set;} = 20;
+    public static int energyGameStart {get; set;} = 100;
+    public static int inventoryCapacity {get; set;} = 10;
+    public static float walkSpeed {get; set;} = 2f;
+
+    // Resource
+    public static int radiusResource {get; set;} = 2;
+
+    // Storage
+    public static Vector3 storageLocation {get; set;} = new Vector3(0,0,0);
+    public static int storageGameStartWood {get; set;} = 200;
+    public static int storageGameStartStone {get; set;} = 200;
+    public static int storageGameStartFood {get; set;} = 200;
+    public static int radiusStorage {get; set;} = 4;
+}

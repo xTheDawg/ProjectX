@@ -9,12 +9,13 @@ public class DoJobAction : ActionNode
     {
         // TODO: I think this should be moved to a method in movement controller.
         if (!hasTarget) {
+            Debug.Log("Do job, aquiring location...");
             target = resourceHelper.FindClosestResource(GetPeasant(), ResourceType.WOOD);
             hasTarget = true;
         }
 
         // Check if peasant is at target location
-        bool arrivedAtTarget = Vector3.Distance(GetPeasant().transform.position, target) < 2;
+        bool arrivedAtTarget = Vector3.Distance(GetPeasant().transform.position, target) < Globals.radiusResource;
 
         // Set animations accordingly
         GetPeasant().animator.SetBool("isWalking", !arrivedAtTarget);

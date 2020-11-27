@@ -7,7 +7,14 @@ public sealed class StorageService
     private static StorageService instance = null;
     private static readonly object padlock = new object();
 
-    Dictionary<ResourceType, int> goods = new Dictionary<ResourceType, int>();
+    public Dictionary<ResourceType, int> resources  {get; set;} = new Dictionary<ResourceType, int>();
+
+    // Init game start stock
+    public StorageService() {
+        resources.Add(ResourceType.WOOD, Globals.storageGameStartWood);
+        resources.Add(ResourceType.STONE, Globals.storageGameStartStone);
+        resources.Add(ResourceType.FOOD, Globals.storageGameStartFood);
+    }
 
     public static StorageService GetInstance() {        
         lock (padlock) {
@@ -16,14 +23,15 @@ public sealed class StorageService
                 instance = new StorageService();
             }
             return instance;
-        }       
-    }    
-
-    public void PutResource(ResourceType resource, int amount) {
-        goods[resource] += amount;
+        }
     }
 
-    public void TakeResource(ResourceType resource, int amount) {
-        goods[resource] -= amount;
+    public void PutResource(ResourceType resource, int amount) {
+        resources[resource] += amount;
+    }
+
+    public int TakeResource(ResourceType resource, int amount) {
+        resources[resource] -= amount;
+        return amount;
     }
 }
