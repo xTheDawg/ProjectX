@@ -14,7 +14,9 @@ public class Peasant : MonoBehaviour
     public Animator animator {get; set;}
     public Vector3 rotation {get; set;}
     public RootSequence root {get; set;}
-    public bool collidedWithStorage {get; set;} 
+    public bool collidedWithStorage {get; set;}
+    public bool collidedWithTree {get; set;}
+    public bool collidedWithStone {get; set;}
 
     private void Start()
     {
@@ -63,9 +65,22 @@ public class Peasant : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.name == "Town Center") {
-            Debug.LogError("collided with storage");
-            collidedWithStorage = true;
+        Debug.LogError(collision.gameObject.name);
+
+        switch (collision.gameObject.name)
+        {
+            case "Town Center":
+                Debug.LogError("collided with storage");
+                collidedWithStorage = true;
+                break;
+            case "PT_Medieval_Tree_1(Clone)":
+                Debug.LogError("Collided with tree");
+                collidedWithTree = true;
+                break;
+            case "PT_Medieval_Rock_6(Clone)":
+                Debug.LogError("Collided with stone");
+                collidedWithStone = true;
+                break;
         }
     }
 }

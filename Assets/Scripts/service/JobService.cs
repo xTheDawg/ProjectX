@@ -6,7 +6,7 @@ public sealed class JobService
     private static JobService instance = null;
     private static readonly object padlock = new object();
 
-    List<Job> jobList = new List<Job>();
+    public List<Job> jobList = new List<Job>();
 
     public static JobService GetInstance() {        
         lock (padlock) {
@@ -16,5 +16,10 @@ public sealed class JobService
             }
             return instance;
         }       
-    }    
+    }
+
+    public void AddJob()
+    {
+        // TODO Sort here
+    }
 }

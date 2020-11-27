@@ -23,4 +23,9 @@ public abstract class Inverter : Node {
         nodeState = NodeState.SUCCESS;
         return nodeState;
     }
+
+     public void AddChild(Node child) {
+        this.node = child;
+        child.parent = this;
+    }
 }

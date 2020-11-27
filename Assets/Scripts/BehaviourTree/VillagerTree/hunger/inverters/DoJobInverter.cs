@@ -2,6 +2,6 @@
 {
     public DoJobInverter()
     {
-        node = new DoJobAction();
+        AddChild(new DoJobAction());
     }
 }
