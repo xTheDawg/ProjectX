@@ -48,7 +48,6 @@ public class Peasant : MonoBehaviour
 
 
     public void GoToLocation(Vector3 location) {
-        Debug.Log(location);
         // Calculate looking direction of peasant
         this.rotation = new Vector3(location.x - this.transform.position.x,
             this.transform.position.y, location.z - this.transform.position.z);
@@ -65,12 +64,10 @@ public class Peasant : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision collision) {
-        Debug.LogError(collision.gameObject.name);
-
         switch (collision.gameObject.name)
         {
             case "Town Center":
-                Debug.LogError("collided with storage");
+                Debug.LogError("Collided with storage");
                 collidedWithStorage = true;
                 break;
             case "PT_Medieval_Tree_1(Clone)":
