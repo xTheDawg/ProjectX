@@ -19,6 +19,7 @@ public class EatAction : ActionNode
         
         if (Time.time - eatStartTime > 5f)
         {
+            Debug.Log("EatAction...");
             GetPeasant().foodLevel = GetPeasant().maxFoodLevel;
             GetPeasant().animator.SetBool("isEating", false);
             isEating = false;

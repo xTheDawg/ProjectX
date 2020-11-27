@@ -13,14 +13,11 @@ public static class Globals {
     public static float walkSpeed {get; set;} = 2f;
 
     // Resource
-    // TODO This should be eliminated
-    public static int radiusResource {get; set;} = 2;
 
     // Storage
     public static Vector3 storageLocation {get; set;} = new Vector3(0,0,0);
     public static int storageGameStartWood {get; set;} = 200;
     public static int storageGameStartStone {get; set;} = 200;
     public static int storageGameStartFood {get; set;} = 200;
-    // TODO This should be eliminated
-    public static int radiusStorage {get; set;} = 4;
+
 }

@@ -10,7 +10,7 @@ public class CheckFoodStockAction : ActionNode
     {
         if (!hasTarget)
         {
-            Debug.Log("check food stock, aquiring target...");
+            Debug.Log("CheckFoodStockAction...");
             GetPeasant().GoToLocation(Globals.storageLocation);
             hasTarget = true;
         }
@@ -21,11 +21,11 @@ public class CheckFoodStockAction : ActionNode
         if (!GetPeasant().collidedWithStorage)
         {
             // Keep moving
-            Debug.Log("keep moving");
             GetPeasant().GoToLocation(Globals.storageLocation);
             return NodeState.RUNNING;
         }
 
+        GetPeasant().collidedWithStorage = false;
         // If there is enough food in storage, take it and fill food level.
         return storageService.resources[ResourceType.FOOD] >= Globals.eatAmount ? NodeState.SUCCESS : NodeState.FAILURE;
     }
