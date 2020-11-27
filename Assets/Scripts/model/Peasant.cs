@@ -14,9 +14,13 @@ public class Peasant : MonoBehaviour
     public Animator animator {get; set;}
     public Vector3 rotation {get; set;}
     public RootSequence root {get; set;}
+    public bool collidedWithStorage {get; set;}
+    public bool collidedWithTree {get; set;}
+    public bool collidedWithStone {get; set;}
 
     private void Start()
     {
+        collidedWithStorage = false;
         root = new RootSequence(this);
         animator = gameObject.GetComponent<Animator>();
         Work();
@@ -44,6 +48,7 @@ public class Peasant : MonoBehaviour
 
 
     public void GoToLocation(Vector3 location) {
+        Debug.Log(location);
         // Calculate looking direction of peasant
         this.rotation = new Vector3(location.x - this.transform.position.x,
             this.transform.position.y, location.z - this.transform.position.z);
@@ -57,5 +62,25 @@ public class Peasant : MonoBehaviour
         this.transform.position = Vector3.MoveTowards(this.transform.position,
             location,
             this.walkSpeed * Time.deltaTime);
+    }
+
+    void OnCollisionEnter(Collision collision) {
+        Debug.LogError(collision.gameObject.name);
+
+        switch (collision.gameObject.name)
+        {
+            case "Town Center":
+                Debug.LogError("collided with storage");
+                collidedWithStorage = true;
+                break;
+            case "PT_Medieval_Tree_1(Clone)":
+                Debug.LogError("Collided with tree");
+                collidedWithTree = true;
+                break;
+            case "PT_Medieval_Rock_6(Clone)":
+                Debug.LogError("Collided with stone");
+                collidedWithStone = true;
+                break;
+        }
     }
 }

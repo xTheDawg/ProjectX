@@ -5,6 +5,8 @@ public class EatAction : ActionNode
     private bool isEating = false;
     private float eatStartTime;
 
+    private StorageService storageService = new StorageService();
+
     public override NodeState Execute()
     {
         if (!isEating)
@@ -21,6 +23,7 @@ public class EatAction : ActionNode
             GetPeasant().animator.SetBool("isEating", false);
             isEating = false;
             Debug.Log("Eating complete! Food Level is now at: " + GetPeasant().foodLevel);
+            GetPeasant().foodLevel += storageService.TakeResource(ResourceType.FOOD, Globals.eatAmount);
             return NodeState.SUCCESS;
         }
         
