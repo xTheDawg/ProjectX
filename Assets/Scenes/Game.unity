@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 585549083}
   - component: {fileID: 585549084}
   m_Layer: 0
-  m_Name: ResourceSpawner
+  m_Name: WorldHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -813,22 +813,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1390485202}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2001169204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2001169203}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23cefbd8a56d5a5449090332e46ad1b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 5
-  targetPosition: {x: 0, y: 0, z: 0}
-  lookAtTarget: {x: 0, y: 0, z: 0}
-  playerRot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &2001169205
 MonoBehaviour:
   m_ObjectHideFlags: 0
