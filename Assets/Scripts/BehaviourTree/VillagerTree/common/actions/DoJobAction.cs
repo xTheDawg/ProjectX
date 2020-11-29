@@ -15,17 +15,16 @@ public class DoJobAction : ActionNode
             hasTarget = true;
         }
 
-        // Set animations accordingly
-        GetPeasant().animator.SetBool("isWalking", !GetPeasant().collidedWithTree);
-        
         //Move Character unless he's at the Target.
         if (GetPeasant().GoToLocation(target))
         {
+            GetPeasant().animator.SetBool("isWalking", true);
             GetPeasant().collidedWithTree = false;
             return NodeState.SUCCESS;
         }
         else
         {
+            GetPeasant().animator.SetBool("isWalking", false);
             return NodeState.RUNNING;
         }
 
