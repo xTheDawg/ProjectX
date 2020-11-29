@@ -11,6 +11,7 @@ public static class Globals {
     public static int energyGameStart {get; set;} = 100;
     public static int inventoryCapacity {get; set;} = 10;
     public static float walkSpeed {get; set;} = 2f;
+    public static float rotSpeed {get; set;} = 5f;
 
     // Resource
 

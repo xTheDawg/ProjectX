@@ -17,16 +17,18 @@ public class DoJobAction : ActionNode
 
         // Set animations accordingly
         GetPeasant().animator.SetBool("isWalking", !GetPeasant().collidedWithTree);
-        // GetPeasant().animator.SetBool("isResting", arrivedAtTarget);
-
-        if (!GetPeasant().collidedWithTree)
+        
+        //Move Character unless he's at the Target.
+        if (GetPeasant().GoToLocation(target))
         {
-            // Keep moving
-            GetPeasant().GoToLocation(target);
+            GetPeasant().collidedWithTree = false;
+            return NodeState.SUCCESS;
+        }
+        else
+        {
             return NodeState.RUNNING;
         }
 
-        GetPeasant().collidedWithTree = false;
-        return NodeState.SUCCESS;
+        
     }
 }
