@@ -16,16 +16,16 @@ public class DoJobAction : ActionNode
         }
 
         //Move Character unless he's at the Target.
-        if (GetPeasant().GoToLocation(target))
+        if (!GetPeasant().GoToLocation(target))
         {
             GetPeasant().animator.SetBool("isWalking", true);
             GetPeasant().collidedWithTree = false;
-            return NodeState.SUCCESS;
+            return NodeState.RUNNING;
         }
         else
         {
             GetPeasant().animator.SetBool("isWalking", false);
-            return NodeState.RUNNING;
+            return NodeState.SUCCESS;
         }
 
         
