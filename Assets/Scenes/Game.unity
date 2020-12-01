@@ -1024,19 +1024,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10.4, y: 14, z: 10.4}
   m_Center: {x: 0, y: 7, z: 0}
---- !u!135 &1409165975
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1409165971}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 50
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1451009219
 PrefabInstance:
   m_ObjectHideFlags: 0

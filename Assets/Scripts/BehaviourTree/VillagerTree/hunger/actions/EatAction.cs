@@ -24,7 +24,7 @@ public class EatAction : ActionNode
             GetPeasant().animator.SetBool("isEating", false);
             isEating = false;
             Debug.Log("Eating complete! Food Level is now at: " + GetPeasant().foodLevel);
-            GetPeasant().foodLevel += storageService.TakeResource(ResourceType.FOOD, Globals.eatAmount);
+            GetPeasant().foodLevel += storageService.TakeResource(ResourceType.FOOD, (Globals.foodMax - GetPeasant().foodLevel));
             return NodeState.SUCCESS;
         }
         

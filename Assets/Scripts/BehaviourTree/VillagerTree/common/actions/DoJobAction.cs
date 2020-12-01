@@ -2,32 +2,27 @@
 
 public class DoJobAction : ActionNode
 {
-    private bool hasTarget = false;
-    private Vector3 target;
+    private bool doAction = false;
     private ResourceHelper resourceHelper = new ResourceHelper();
 
     public override NodeState Execute()
     {
-        if (!hasTarget)
+        if (!doAction)
         {
             Debug.Log("Do job, aquiring location...");
-            target = resourceHelper.FindClosestResource(GetPeasant(), ResourceType.WOOD);
-            hasTarget = true;
-        }
-
-        //Move Character unless he's at the Target.
-        if (!GetPeasant().GoToLocation(target))
-        {
-            GetPeasant().animator.SetBool("isWalking", true);
-            GetPeasant().collidedWithTree = false;
+            GetPeasant().target = resourceHelper.FindClosestResource(GetPeasant(), ResourceType.WOOD);
+            GetPeasant().hasTarget = true;
+            doAction = true;
             return NodeState.RUNNING;
         }
-        else
+        
+        //Check if Player arrived at destination
+        if (GetPeasant().CheckPosition())
         {
-            GetPeasant().animator.SetBool("isWalking", false);
+            doAction = false;
             return NodeState.SUCCESS;
         }
-
         
+        return NodeState.FAILURE;
     }
 }

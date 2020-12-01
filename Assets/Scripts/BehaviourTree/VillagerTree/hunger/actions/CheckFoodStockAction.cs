@@ -2,31 +2,28 @@
 
 public class CheckFoodStockAction : ActionNode
 {
-    private bool hasTarget = false;
+    private bool doAction = false;
 
     private StorageService storageService = StorageService.GetInstance();
 
     public override NodeState Execute()
     {
-        if (!hasTarget)
+        if (!doAction)
         {
             Debug.Log("CheckFoodStockAction...");
-            GetPeasant().GoToLocation(Globals.storageLocation);
-            hasTarget = true;
-        }
-
-        // Set animations accordingly
-        GetPeasant().animator.SetBool("isWalking", !GetPeasant().collidedWithStorage);
-
-        if (!GetPeasant().collidedWithStorage)
-        {
-            // Keep moving
-            GetPeasant().GoToLocation(Globals.storageLocation);
+            GetPeasant().target = Globals.storageLocation;
+            GetPeasant().hasTarget = true;
+            doAction = true;
             return NodeState.RUNNING;
         }
 
-        GetPeasant().collidedWithStorage = false;
-        // If there is enough food in storage, take it and fill food level.
-        return storageService.resources[ResourceType.FOOD] >= Globals.eatAmount ? NodeState.SUCCESS : NodeState.FAILURE;
+        if (GetPeasant().CheckPosition())
+        {
+            doAction = false;
+            // If there is enough food in storage, take it and fill food level.
+            return storageService.resources[ResourceType.FOOD] >= (Globals.foodMax - GetPeasant().foodLevel) ? NodeState.SUCCESS : NodeState.FAILURE;
+        }
+
+        return NodeState.FAILURE;
     }
 }

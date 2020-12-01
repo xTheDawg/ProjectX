@@ -5,7 +5,6 @@ public static class Globals {
     public static int foodMax {get; set;} = 100;
     public static int foodCritical {get; set;} = 20;
     public static int foodGameStart {get; set;} = 15;
-    public static int eatAmount {get; set;} = 80;
     public static int energyMax {get; set;} = 100;
     public static int energyCritical {get; set;} = 20;
     public static int energyGameStart {get; set;} = 100;
@@ -16,7 +15,7 @@ public static class Globals {
     // Resource
 
     // Storage
-    public static Vector3 storageLocation {get; set;} = new Vector3(0,0,0);
+    public static Vector3 storageLocation {get; set;} = new Vector3(-1.5f,0,-1);
     public static int storageGameStartWood {get; set;} = 200;
     public static int storageGameStartStone {get; set;} = 200;
     public static int storageGameStartFood {get; set;} = 200;
