@@ -5,8 +5,8 @@ using UnityEngine;
 public class ResourceSpawnController : MonoBehaviour
 {
     public GameObject treePrefab;
-
     public GameObject stonePrefab;
+    private GameObject spawnedObject;
 
     // Start is called before the first frame update
     void Start()
@@ -18,17 +18,30 @@ public class ResourceSpawnController : MonoBehaviour
 
         for (int i = 0; i < 100; i++)
         {
-            spawnResources(treePrefab);
+            if (!spawnResources(treePrefab))
+            {
+                i--;
+            }
         }
         for (int i = 0; i < 30; i++)
         {
-            spawnResources(stonePrefab);
+            if (!spawnResources(stonePrefab))
+            {
+                i--;
+            }
         }
     }
     
-    public void spawnResources(GameObject toSpawn)
+    public bool spawnResources(GameObject toSpawn)
     {
-        Instantiate(toSpawn, new Vector3(Random.Range(-130, 130), 0, Random.Range(-130, 130)),
+        spawnedObject = Instantiate(toSpawn, new Vector3(Random.Range(-130, 130), 0, Random.Range(-130, 130)),
             new Quaternion(0, Random.Range(0, 360), 0, 0));
+        if ((spawnedObject.transform.position - Vector3.zero).sqrMagnitude < 900)
+        {
+            Destroy(spawnedObject);
+            return false;
+        }
+
+        return true;
     }
 }

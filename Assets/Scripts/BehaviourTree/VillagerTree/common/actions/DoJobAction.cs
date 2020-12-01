@@ -11,7 +11,10 @@ public class DoJobAction : ActionNode
         {
             Debug.Log("Do job, aquiring location...");
             GetPeasant().target = resourceHelper.FindClosestResource(GetPeasant(), ResourceType.WOOD);
-            GetPeasant().hasTarget = true;
+            if (!GetPeasant().CheckPosition())
+            {
+                GetPeasant().hasTarget = true;
+            }
             doAction = true;
             return NodeState.RUNNING;
         }

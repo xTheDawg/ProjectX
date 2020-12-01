@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 23725820505066812}
   - component: {fileID: 95368750422586268}
   - component: {fileID: 4769963557200094599}
-  - component: {fileID: 2686852061649554410}
   m_Layer: 0
   m_Name: PT_Medieval_Tree_1
   m_TagString: Tree
@@ -115,16 +114,3 @@ CapsuleCollider:
   m_Height: 5.99
   m_Direction: 1
   m_Center: {x: 0.17, y: 2.4552586, z: 0.16}
---- !u!65 &2686852061649554410
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1074510935149524}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5.3252907, y: 6.0813403, z: 5.2534885}
-  m_Center: {x: 0.3668568, y: 2.4552586, z: -0.122027636}
