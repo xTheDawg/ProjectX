@@ -8,9 +8,9 @@ public class ResourceHelper
     private float distanceToClosestResource = Mathf.Infinity;
     private TreeController[] allTreeResources = GameObject.FindObjectsOfType<TreeController>();
 
-    // private StoneController[] allStoneResources = GameObject.FindObjectsOfType<StoneController>();
+    private StoneController[] allStoneResources = GameObject.FindObjectsOfType<StoneController>();
 
-    // private FoodController[] allFoodResources = GameObject.FindObjectsOfType<FoodController>();
+    private FoodController[] allFoodResources = GameObject.FindObjectsOfType<FoodController>();
 
     private ResourceController[] allResourcesOfType;
 
@@ -25,14 +25,13 @@ public class ResourceHelper
             case ResourceType.WOOD:
                 allResourcesOfType = allTreeResources;
                 break;
-            /*
+            
             case ResourceType.STONE:
                 allResourcesOfType = allStoneResources;
                 break;
+            
             case ResourceType.FOOD:
                 allResourcesOfType = allFoodResources;
-                break;*/
-            default:
                 break;
         }
 
