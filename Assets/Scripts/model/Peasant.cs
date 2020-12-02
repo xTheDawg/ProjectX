@@ -112,7 +112,7 @@ public class Peasant : MonoBehaviour
     public bool CheckPosition()
     {
         //If Peasant Position is within range then return true
-        return (transform.position - target).sqrMagnitude < 9;
+        return Vector3.Distance(transform.position, target) < 3;
     }
 
     void OnCollisionEnter(Collision collision) {
@@ -136,8 +136,8 @@ public class Peasant : MonoBehaviour
     public void RotatePlayer() {
         //Setting Direction and Position of Pathfinding Rays
         deltaRotation = Vector3.zero;
-        directionR = rotation * Quaternion.AngleAxis(angle, this.transform.up) * Vector3.forward * detectionDistance;
-        directionL = rotation * Quaternion.AngleAxis(-angle, this.transform.up) * Vector3.forward * detectionDistance;
+        directionR = rotation * Quaternion.AngleAxis(angle, transform.up) * Vector3.forward * detectionDistance;
+        directionL = rotation * Quaternion.AngleAxis(-angle, transform.up) * Vector3.forward * detectionDistance;
         rayPosition = new Vector3(transform.position.x, 0.3f, position.z);
         var rayR = new Ray(rayPosition, directionR);
         var rayL = new Ray(rayPosition, directionL);

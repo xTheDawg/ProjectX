@@ -6,40 +6,36 @@ using UnityEngine;
 public class ResourceHelper
 {
     private float distanceToClosestResource = Mathf.Infinity;
-    private TreeController[] allTreeResources = GameObject.FindObjectsOfType<TreeController>();
-
-    private StoneController[] allStoneResources = GameObject.FindObjectsOfType<StoneController>();
-
-    private FoodController[] allFoodResources = GameObject.FindObjectsOfType<FoodController>();
 
     private ResourceController[] allResourcesOfType;
 
     private Vector3 targetPosition;
     
-    // Find the closest resource of a specific type that is closest to the peasant.
-    public Vector3 FindClosestResource(Peasant peasant, ResourceType resourceType)
+    // Find the closest resource of a specific type that is closest to the input position.
+    public Vector3 FindClosestResource(Vector3 position, ResourceType resourceType)
     {
         MonoBehaviour closestResource = null;
 
         switch(resourceType) {
             case ResourceType.WOOD:
-                allResourcesOfType = allTreeResources;
+                allResourcesOfType = GameObject.FindObjectsOfType<TreeController>();
                 break;
             
             case ResourceType.STONE:
-                allResourcesOfType = allStoneResources;
+                allResourcesOfType = GameObject.FindObjectsOfType<StoneController>();
                 break;
             
             case ResourceType.FOOD:
-                allResourcesOfType = allFoodResources;
+                allResourcesOfType = GameObject.FindObjectsOfType<FoodController>();
                 break;
         }
+                
 
         foreach (ResourceController resource in allResourcesOfType)
         {
-            float distanceToResource = Vector3.Distance(resource.transform.position, peasant.transform.position);
+            float distanceToResource = Vector3.Distance(resource.transform.position, position);
             
-            if (distanceToResource < distanceToClosestResource)
+            if (distanceToResource < distanceToClosestResource && distanceToResource != 0)
             {
                 distanceToClosestResource = distanceToResource;
                 closestResource = resource;
@@ -47,6 +43,7 @@ public class ResourceHelper
         }
 
         // Return position of closest resource
-        return closestResource.transform.position;
+        if (!(closestResource is null)) return closestResource.transform.position;
+        return Vector3.zero;
     }
 }
