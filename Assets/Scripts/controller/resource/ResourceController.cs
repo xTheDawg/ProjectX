@@ -6,38 +6,22 @@ public class ResourceController : MonoBehaviour
 {
     protected GameObject resource;
     protected int resourceAmount;
-    protected float timeToReset = 10.0f;
-    protected CapsuleCollider collider;
-    protected MeshRenderer renderer = new MeshRenderer();
 
-    // Update is called once per frame
-    public IEnumerator Wait()
+    public int HarvestResource(int amount)
     {
-        yield return new WaitForSeconds(timeToReset);
-        renderer.enabled = true;
-        collider.enabled = true;
-        resourceAmount = Random.Range(5, 10);
+        resourceAmount -= amount;
+        if (resourceAmount <= 0)
+        {
+            amount += resourceAmount;
+            resourceAmount = 0;
+            Destroy(gameObject);
+        }
+
+        return amount;
     }
     
-    private void Reset()
-    {
-        renderer.enabled = false;
-        collider.enabled = false;
-        StartCoroutine(Wait());
-    }
-
     public int GetResourceAmount()
     {
         return resourceAmount;
-    }
-    
-    public void SetResourceAmount(int amount)
-    {
-        resourceAmount += amount;
-        if (resourceAmount <= 0)
-        {
-            resourceAmount = 0;
-            Reset();
-        }
     }
 }

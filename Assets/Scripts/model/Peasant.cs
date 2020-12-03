@@ -3,14 +3,15 @@ using UnityEngine;
 
 public class Peasant : MonoBehaviour
 {
+    //Peasant stats
     public float walkSpeed {get; set;} = Globals.walkSpeed;
     public float rotSpeed {get; set;} = Globals.rotSpeed;
-    public float fatigueTimer {get; set;} = 0f;
     public int foodLevel {get; set;} = Globals.foodGameStart;
     public int maxFoodLevel {get; set;} = Globals.foodMax;
     public int energyLevel {get; set;} = Globals.energyGameStart;
     public int maxEnergyLevel {get; set;} = Globals.energyMax;
     public int inventoryCapacity {get; set;} = Globals.inventoryCapacity;
+    //Misc
     public Animator animator {get; set;}
     public Vector3 targetRotation {get; set;}
     public RootSequence root {get; set;}
@@ -19,6 +20,9 @@ public class Peasant : MonoBehaviour
     public bool collidedWithStone {get; set;}
     public Vector3 position {get; set;}
     public Quaternion rotation {get; set;}
+    public float fatigueTimer {get; set;} = 0f;
+    public int woodInStorage {get; set;}
+    public int stoneInStorage {get; set;}
 
     //Fields for Pathfinding
     public float angle {get; set;}

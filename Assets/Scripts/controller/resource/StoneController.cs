@@ -9,7 +9,5 @@ public class StoneController : ResourceController
     {
         resource = this.gameObject;
         resourceAmount = Random.Range(50, 100);
-        collider = resource.GetComponent<CapsuleCollider>();
-        renderer = resource.GetComponent<MeshRenderer>();
     }
 }

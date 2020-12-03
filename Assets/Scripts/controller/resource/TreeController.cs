@@ -8,8 +8,6 @@ public class TreeController : ResourceController
     void Start()
     {
         resource = this.gameObject;
-        resourceAmount = Random.Range(5, 10);
-        collider = resource.GetComponent<CapsuleCollider>();
-        renderer = resource.GetComponent<MeshRenderer>();
+        resourceAmount = Random.Range(100, 200);
     }
 }
