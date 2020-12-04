@@ -2,30 +2,20 @@
 
 public class DoJobAction : ActionNode
 {
-    private bool doAction = false;
     private ResourceHelper resourceHelper = new ResourceHelper();
+    private JobService jobService = JobService.GetInstance();
 
     public override NodeState Execute()
     {
-        if (!doAction)
+        if (GetPeasant().currentJob == null)
         {
-            Debug.Log("Do job, aquiring location...");
-            GetPeasant().target = resourceHelper.FindClosestResource(GetPeasant().position, ResourceType.WOOD);
-            if (!GetPeasant().CheckPosition())
-            {
-                GetPeasant().hasTarget = true;
-            }
-            doAction = true;
+            Debug.Log("DoJobAction(), no current job");
+            GetPeasant().currentJob = jobService.GetJob(GetPeasant());
             return NodeState.RUNNING;
         }
-        
-        //Check if Player arrived at destination
-        if (GetPeasant().CheckPosition())
-        {
-            doAction = false;
-            return NodeState.SUCCESS;
-        }
-        
-        return NodeState.FAILURE;
+        GetPeasant().currentJob.jobDone = false;
+        GetPeasant().currentJob = null;
+        Debug.Log("DoJobAction() SUCCESS");
+        return NodeState.SUCCESS;
     }
 }

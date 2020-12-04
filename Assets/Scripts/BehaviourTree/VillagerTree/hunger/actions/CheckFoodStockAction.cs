@@ -12,12 +12,11 @@ public class CheckFoodStockAction : ActionNode
         {
             Debug.Log("CheckFoodStockAction...");
             GetPeasant().target = Globals.storageLocation;
-            GetPeasant().hasTarget = true;
             doAction = true;
             return NodeState.RUNNING;
         }
 
-        if (GetPeasant().CheckPosition())
+        if (GetPeasant().CheckPosition(Globals.storageLocation))
         {
             doAction = false;
             // If there is enough food in storage, take it and fill food level.

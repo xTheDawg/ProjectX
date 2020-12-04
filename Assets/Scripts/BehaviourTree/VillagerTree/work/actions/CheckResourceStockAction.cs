@@ -7,9 +7,8 @@ public class CheckResourceStockAction : ActionNode
     public override NodeState Execute()
     {
         GetPeasant().target = Globals.storageLocation;
-        if (!GetPeasant().CheckPosition())
+        if (!GetPeasant().CheckPosition(Globals.storageLocation))
         {
-            GetPeasant().hasTarget = true;
             return NodeState.RUNNING;
         }
 
