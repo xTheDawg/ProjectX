@@ -63,7 +63,7 @@ public class GatherJob : Job
                 if (timer >= 3.25f)
                 {
                     Debug.Log("Harvesting resource of type: " + resourceType);
-                    peasant.inventory[resourceType] += resourceObject.HarvestResource(100);
+                    peasant.inventory[resourceType] += resourceObject.HarvestResource(50);
                     timer = 0;
                 }
             }
