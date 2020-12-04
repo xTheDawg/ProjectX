@@ -33,7 +33,7 @@ public class GatherJob : Job
         }
         else
         {
-            if (peasant.inventory[resourceType] >= Globals.inventoryCapacity)
+            if (peasant.inventory[resourceType] >= Globals.inventoryCapacity || resourceObject == null)
             {
                 peasant.animator.SetBool("isSwinging", false);
                 if (!peasant.CheckPosition(Globals.storageLocation))
@@ -44,7 +44,7 @@ public class GatherJob : Job
                 //TODO Turn Peasant towards target
                 peasant.animator.SetBool("isPickingUp", true);
                 timer += Time.deltaTime;
-                if (timer >= 0f)
+                if (timer >= 6f)
                 {
                     peasant.animator.SetBool("isPickingUp", false);
                     storageService.PutResource(resourceType, peasant.inventory[resourceType]);
@@ -59,19 +59,10 @@ public class GatherJob : Job
             }
             else
             {
-                if (resourceObject == null)
-                {
-                    peasant.animator.SetBool("isSwinging", false);
-                    // Lower energy and food level when job execution is done
-                    peasant.energyLevel -= energyRequired;
-                    peasant.foodLevel -= foodRequired;
-                    jobDone = true;
-                    jobService.jobList.Remove(this);
-                }
                 //TODO Turn Peasant towards target
                 peasant.animator.SetBool("isSwinging", true);
                 timer += Time.deltaTime;
-                if (timer >= 0.5f)
+                if (timer >= 3.25f)
                 {
                     Debug.Log("Harvesting resource");
                     peasant.inventory[resourceType] += resourceObject.HarvestResource(100);
