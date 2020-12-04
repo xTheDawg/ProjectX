@@ -8,7 +8,7 @@ public static class Globals {
     public static int energyMax {get; set;} = 100;
     public static int energyCritical {get; set;} = 20;
     public static int energyGameStart {get; set;} = 100;
-    public static int inventoryCapacity {get; set;} = 10;
+    public static int inventoryCapacity {get; set;} = 100;
     public static float walkSpeed {get; set;} = 5f;
     public static float rotSpeed {get; set;} = 5f;
 
