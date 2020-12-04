@@ -6,6 +6,8 @@ public class GatherJob : Job
     
     public ResourceHelper resourceHelper = new ResourceHelper();
     
+    private JobService jobService = JobService.GetInstance();
+    
     public GatherJob()
     {
     }
@@ -28,7 +30,7 @@ public class GatherJob : Job
         }
         else
         {
-            Debug.Log("Harvesting resource");
+            Debug.Log("Harvesting resource: " + resourceType);
             peasant.inventory[resourceType] += resourceObject.HarvestResource(5);
             
             // TODO Implement in progress job
@@ -42,6 +44,8 @@ public class GatherJob : Job
             peasant.energyLevel -= energyRequired;
             peasant.foodLevel -= foodRequired;
             jobDone = true;
+
+            jobService.jobList.Remove(this);
         }
     }
 }

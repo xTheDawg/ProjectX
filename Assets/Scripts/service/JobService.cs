@@ -19,17 +19,15 @@ public sealed class JobService
         }       
     }
 
-    public void AddJob()
+    // Add job to joblist and order it by priority.
+    public void AddJob(Job jobToAd)
     {
-        // TODO Sort here
+        jobList.Add(jobToAd);
+        jobList = jobList.OrderBy(job => job.priority).ToList();
     }
     
     public Job GetJob(Peasant peasant)
     {
-        jobList.Clear();
-        // TODO Remove, only for testing purposes
-        jobList.Add(new GatherJob(1, ResourceType.WOOD,10 , 5));
-        
         Job job = jobList.First();
         job.peasant = peasant;
         return job;
