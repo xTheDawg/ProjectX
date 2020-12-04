@@ -5,23 +5,41 @@ public class CheckResourcesStockAction : ActionNode
 
     StorageService storageService = StorageService.GetInstance();
     JobService jobService = JobService.GetInstance();
+
+    private bool doAction = false;
     
     public override NodeState Execute()
     {
-        bool anyResourceNeeded = false;
-        if (storageService.resources[ResourceType.WOOD] < 1000)
-        {
-            Debug.Log("Adding Gather WOOD Job.");
-            jobService.AddJob(new GatherJob(1, ResourceType.WOOD, 10, 10));
-            anyResourceNeeded = true;
-        }
         
-        if (storageService.resources[ResourceType.STONE] < 500)
+        
+        if (!doAction)
         {
-            Debug.Log("Adding Gather STONE Job.");
-            jobService.AddJob(new GatherJob(2, ResourceType.STONE, 10, 10));
-            anyResourceNeeded = true;
+            Debug.Log("CheckResourcesStockAction...");
+            GetPeasant().target = Globals.storageLocation;
+            doAction = true;
+            return NodeState.RUNNING;
         }
-        return anyResourceNeeded ? NodeState.SUCCESS : NodeState.FAILURE;
+
+        if (GetPeasant().CheckPosition(Globals.storageLocation))
+        {
+            doAction = false;
+            bool anyResourceNeeded = false;
+            if (storageService.resources[ResourceType.WOOD] < 1000)
+            {
+                Debug.LogError("Adding Gather WOOD Job.");
+                jobService.AddJob(new GatherJob(Globals.priorityGatherWood, ResourceType.WOOD, Globals.energyRequiredGatherWood, Globals.foodRequiredGatherWood));
+                anyResourceNeeded = true;
+            }
+        
+            if (storageService.resources[ResourceType.STONE] < 500)
+            {
+                Debug.LogError("Adding Gather STONE Job.");
+                jobService.AddJob(new GatherJob(Globals.priorityGatherStone, ResourceType.STONE, Globals.energyRequiredGatherStone, Globals.foodRequiredGatherStone));
+                anyResourceNeeded = true;
+            }
+            return anyResourceNeeded ? NodeState.SUCCESS : NodeState.FAILURE;
+        }
+
+        return NodeState.FAILURE;
     }
 }
