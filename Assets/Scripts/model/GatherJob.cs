@@ -28,7 +28,6 @@ public class GatherJob : Job
         // If peasant is not at desired location yet, set target.
         if (resourceObject != null && !peasant.CheckPosition(resourceObject.transform.position) && peasant.inventory[resourceType] < Globals.inventoryCapacity)
         {
-            Debug.Log("settings position of job location");
             peasant.target = resourceObject.transform.position;
         }
         else
@@ -38,7 +37,6 @@ public class GatherJob : Job
                 peasant.animator.SetBool("isSwinging", false);
                 if (!peasant.CheckPosition(Globals.storageLocation))
                 {
-                    Debug.Log("settings position of storage location");
                     peasant.target = Globals.storageLocation;
                 }
                 //TODO Turn Peasant towards target
@@ -64,7 +62,7 @@ public class GatherJob : Job
                 timer += Time.deltaTime;
                 if (timer >= 3.25f)
                 {
-                    Debug.Log("Harvesting resource");
+                    Debug.Log("Harvesting resource of type: " + resourceType);
                     peasant.inventory[resourceType] += resourceObject.HarvestResource(100);
                     timer = 0;
                 }

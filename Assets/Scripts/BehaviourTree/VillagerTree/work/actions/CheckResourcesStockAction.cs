@@ -14,7 +14,6 @@ public class CheckResourcesStockAction : ActionNode
         
         if (!doAction)
         {
-            Debug.Log("CheckResourcesStockAction...");
             GetPeasant().target = Globals.storageLocation;
             doAction = true;
             return NodeState.RUNNING;

@@ -10,7 +10,6 @@ public class CheckFoodStockAction : ActionNode
     {
         if (!doAction)
         {
-            Debug.Log("CheckFoodStockAction...");
             GetPeasant().target = Globals.storageLocation;
             doAction = true;
             return NodeState.RUNNING;

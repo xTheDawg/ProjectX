@@ -19,9 +19,6 @@ public class Peasant : MonoBehaviour
     public Animator animator { get; set; }
     public Vector3 targetRotation { get; set; }
     public RootSequence root { get; set; }
-    public bool collidedWithStorage { get; set; }
-    public bool collidedWithTree { get; set; }
-    public bool collidedWithStone { get; set; }
     public Vector3 position { get; set; }
     public Quaternion rotation { get; set; }
     public float fatigueTimer { get; set; } = 0f;
@@ -46,7 +43,6 @@ public class Peasant : MonoBehaviour
     {
         angle = 15f;
         detectionDistance = 3f;
-        collidedWithStorage = false;
         target = Vector3.zero;
         root = new RootSequence(this);
         animator = gameObject.GetComponent<Animator>();
@@ -133,25 +129,6 @@ public class Peasant : MonoBehaviour
     {
         //If Peasant Position is within range then return true
         return Vector3.Distance(transform.position, targetPosition) < 3;
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        switch (collision.gameObject.name)
-        {
-            case "Town Center":
-                Debug.LogError("Collided with storage");
-                collidedWithStorage = true;
-                break;
-            case "PT_Medieval_Tree_1(Clone)":
-                Debug.LogError("Collided with tree");
-                collidedWithTree = true;
-                break;
-            case "PT_Medieval_Rock_6(Clone)":
-                Debug.LogError("Collided with stone");
-                collidedWithStone = true;
-                break;
-        }
     }
 
     public void RotatePlayer()
