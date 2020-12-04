@@ -12,9 +12,9 @@ public class ResourceHelper
     private Vector3 targetPosition;
     
     // Find the closest resource of a specific type that is closest to the input position.
-    public Vector3 FindClosestResource(Vector3 position, ResourceType resourceType)
+    public ResourceController FindClosestResource(Vector3 position, ResourceType resourceType)
     {
-        MonoBehaviour closestResource = null;
+        ResourceController closestResource = null;
 
         switch(resourceType) {
             case ResourceType.WOOD:
@@ -43,7 +43,6 @@ public class ResourceHelper
         }
 
         // Return position of closest resource
-        if (!(closestResource is null)) return closestResource.transform.position;
-        return Vector3.zero;
+        return closestResource;
     }
 }

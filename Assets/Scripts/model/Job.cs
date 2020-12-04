@@ -1,11 +1,17 @@
-﻿public class Job {
-    private int priority {get; set;}
-    private Location location {get; set;}
-    private int energyNeeded {get; set;}
+﻿using UnityEngine;
 
-    public Job(int priority, Location location, int energyNeeded) {
-         this.priority = priority;
-         this.location = location;
-         this.energyNeeded = energyNeeded;
-     }
+public abstract class Job {
+    public int priority {get; set;}
+    public ResourceController resourceObject {get; set;}
+    public int energyRequired {get; set;}
+    public int foodRequired {get; set;}
+    public bool jobDone {get; set;}
+    public Peasant peasant {get; set;}
+
+
+    public Job()
+    {
+    }
+
+    public abstract void DoJob();
 }

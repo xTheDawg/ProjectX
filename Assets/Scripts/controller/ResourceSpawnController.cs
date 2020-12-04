@@ -30,10 +30,11 @@ public class ResourceSpawnController : MonoBehaviour
                 new Quaternion(0, Random.Range(0, 360), 0, 0));
 
             //Destroy Object if it was spawned too close to the center
-            if (Vector3.Distance(spawnedObject.transform.position,Vector3.zero) < 50 || 
-                Vector3.Distance(spawnedObject.transform.position,resourceHelper.FindClosestResource(spawnedObject.transform.position, ResourceType.WOOD)) < 4 ||
-                Vector3.Distance(spawnedObject.transform.position,resourceHelper.FindClosestResource(spawnedObject.transform.position, ResourceType.STONE)) < 4 ||
-                Vector3.Distance(spawnedObject.transform.position,resourceHelper.FindClosestResource(spawnedObject.transform.position, ResourceType.FOOD)) < 4)
+            if (Vector3.Distance(spawnedObject.transform.position,Vector3.zero) < 10)
+                // || 
+                // Vector3.Distance(spawnedObject.transform.position,resourceHelper.FindClosestResource(spawnedObject.transform.position, ResourceType.WOOD).transform.position) < 4 ||
+                // Vector3.Distance(spawnedObject.transform.position,resourceHelper.FindClosestResource(spawnedObject.transform.position, ResourceType.STONE).transform.position) < 4 ||
+                // Vector3.Distance(spawnedObject.transform.position,resourceHelper.FindClosestResource(spawnedObject.transform.position, ResourceType.FOOD).transform.position) < 4)
             {
                 Debug.Log("Position invalid!");
                 Destroy(spawnedObject);

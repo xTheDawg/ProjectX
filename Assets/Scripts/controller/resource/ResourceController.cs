@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ResourceController : MonoBehaviour
 {
-    protected GameObject resource;
+    protected GameObject resource { get; set;}
     protected int resourceAmount;
 
     public int HarvestResource(int amount)

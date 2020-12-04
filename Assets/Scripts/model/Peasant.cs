@@ -1,52 +1,61 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class Peasant : MonoBehaviour
 {
     //Peasant stats
-    public float walkSpeed {get; set;} = Globals.walkSpeed;
-    public float rotSpeed {get; set;} = Globals.rotSpeed;
-    public int foodLevel {get; set;} = Globals.foodGameStart;
-    public int maxFoodLevel {get; set;} = Globals.foodMax;
-    public int energyLevel {get; set;} = Globals.energyGameStart;
-    public int maxEnergyLevel {get; set;} = Globals.energyMax;
-    public int inventoryCapacity {get; set;} = Globals.inventoryCapacity;
+    public float walkSpeed { get; set; } = Globals.walkSpeed;
+    public float rotSpeed { get; set; } = Globals.rotSpeed;
+    public int foodLevel { get; set; } = Globals.foodGameStart;
+    public int maxFoodLevel { get; set; } = Globals.foodMax;
+    public int energyLevel { get; set; } = Globals.energyGameStart;
+    public int maxEnergyLevel { get; set; } = Globals.energyMax;
+
+    public int inventoryCapacity { get; set; } = Globals.inventoryCapacity;
+    
+    public Dictionary<ResourceType, int> inventory  {get; set;} = new Dictionary<ResourceType, int>();
+
     //Misc
-    public Animator animator {get; set;}
-    public Vector3 targetRotation {get; set;}
-    public RootSequence root {get; set;}
-    public bool collidedWithStorage {get; set;}
-    public bool collidedWithTree {get; set;}
-    public bool collidedWithStone {get; set;}
-    public Vector3 position {get; set;}
-    public Quaternion rotation {get; set;}
-    public float fatigueTimer {get; set;} = 0f;
-    public int woodInStorage {get; set;}
-    public int stoneInStorage {get; set;}
+    public Animator animator { get; set; }
+    public Vector3 targetRotation { get; set; }
+    public RootSequence root { get; set; }
+    public bool collidedWithStorage { get; set; }
+    public bool collidedWithTree { get; set; }
+    public bool collidedWithStone { get; set; }
+    public Vector3 position { get; set; }
+    public Quaternion rotation { get; set; }
+    public float fatigueTimer { get; set; } = 0f;
+    public int woodInStorage { get; set; }
+    public int stoneInStorage { get; set; }
 
     //Fields for Pathfinding
-    public float angle {get; set;}
-    public float detectionDistance {get; set;}
-    public Vector3 directionR {get; set;}
-    public Vector3 directionL {get; set;}
-    public Vector3 deltaRotation {get; set;}
-    public Vector3 rayPosition {get; set;}
+    public float angle { get; set; }
+    public float detectionDistance { get; set; }
+    public Vector3 directionR { get; set; }
+    public Vector3 directionL { get; set; }
+    public Vector3 deltaRotation { get; set; }
+    public Vector3 rayPosition { get; set; }
     private RaycastHit hit;
-    
+
     //Fields for controlling Movement
-    public bool hasTarget {get; set;}
-    public Vector3 target {get; set;}
+    public Vector3 target { get; set; }
+
+    public Job currentJob { get; set; }
 
     private void Start()
     {
         angle = 15f;
         detectionDistance = 3f;
         collidedWithStorage = false;
-        hasTarget = false;
         target = Vector3.zero;
         root = new RootSequence(this);
         animator = gameObject.GetComponent<Animator>();
-        Work();
+        
+        inventory[ResourceType.FOOD] = 0;
+        inventory[ResourceType.WOOD] = 0;
+        inventory[ResourceType.STONE] = 0;
+        
+        EvaluateTree();
     }
 
     private void Update()
@@ -67,6 +76,7 @@ public class Peasant : MonoBehaviour
                 {
                     foodLevel = foodLevel - 7;
                 }
+
                 if (energyLevel <= 0)
                 {
                     energyLevel = 0;
@@ -75,51 +85,58 @@ public class Peasant : MonoBehaviour
                 {
                     energyLevel = energyLevel - 10;
                 }
-                Debug.Log("Energy Level: " + energyLevel + " Food level: " + foodLevel);
+
+                // Debug.Log("Energy Level: " + energyLevel + " Food level: " + foodLevel);
             }
         }
 
-        if (!hasTarget)
+        if (target == Vector3.zero && (currentJob == null || currentJob.jobDone))
         {
-            Work();
+            EvaluateTree();
+        }
+        else if (target == Vector3.zero && !currentJob.jobDone)
+        {
+            currentJob.DoJob();
         }
         else
         {
             GoToLocation();
         }
-                
     }
 
-    public void Work() {
+    public void EvaluateTree()
+    {
         root.Evaluate();
     }
 
-    public void GoToLocation() {
+    public void GoToLocation()
+    {
         //Set walking Animation for Player
         animator.SetBool("isWalking", true);
-        
+
         //Rotate Peasant before moving
         RotatePlayer();
-        
+
         // Move Peasant forward
         transform.position += transform.forward * (walkSpeed * Time.deltaTime);
-        
+
         //Check if Player arrived at the destination
-        if (CheckPosition())
+        if (CheckPosition(target))
         {
             //Stop walking Animation for Player
             animator.SetBool("isWalking", false);
-            hasTarget = false;
+            target = Vector3.zero;
         }
     }
-    
-    public bool CheckPosition()
+
+    public bool CheckPosition(Vector3 targetPosition)
     {
         //If Peasant Position is within range then return true
-        return Vector3.Distance(transform.position, target) < 3;
+        return Vector3.Distance(transform.position, targetPosition) < 3;
     }
 
-    void OnCollisionEnter(Collision collision) {
+    void OnCollisionEnter(Collision collision)
+    {
         switch (collision.gameObject.name)
         {
             case "Town Center":
@@ -136,8 +153,9 @@ public class Peasant : MonoBehaviour
                 break;
         }
     }
-    
-    public void RotatePlayer() {
+
+    public void RotatePlayer()
+    {
         //Setting Direction and Position of Pathfinding Rays
         deltaRotation = Vector3.zero;
         directionR = rotation * Quaternion.AngleAxis(angle, transform.up) * Vector3.forward * detectionDistance;
@@ -145,12 +163,12 @@ public class Peasant : MonoBehaviour
         rayPosition = new Vector3(transform.position.x, 0.3f, position.z);
         var rayR = new Ray(rayPosition, directionR);
         var rayL = new Ray(rayPosition, directionL);
-        
+
         //Draw Rays in Scene Windows while Game is playing
         //Debug.DrawRay(rayPosition, directionR, Color.magenta);
         //Debug.DrawRay(rayPosition, directionL, Color.magenta);
-        
-        
+
+
         //Add Rotation Away from hit object (left prioritized)
         if (Physics.Raycast(rayL, out hit, detectionDistance))
         {
@@ -166,7 +184,7 @@ public class Peasant : MonoBehaviour
         //Apply Rotation to Object. Rotate towards Target Location if no Object was hit, otherwise rotate away from obstacle
         if (deltaRotation != Vector3.zero)
         {
-            transform.rotation = Quaternion.Slerp(rotation,Quaternion.LookRotation(deltaRotation),
+            transform.rotation = Quaternion.Slerp(rotation, Quaternion.LookRotation(deltaRotation),
                 rotSpeed * Time.deltaTime);
         }
         else
