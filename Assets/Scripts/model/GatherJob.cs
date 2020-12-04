@@ -9,6 +9,8 @@ public class GatherJob : Job
     private float timer = 0;
     private StorageService storageService = StorageService.GetInstance();
     
+    private JobService jobService = JobService.GetInstance();
+    
     public GatherJob()
     {
     }
@@ -52,6 +54,7 @@ public class GatherJob : Job
                     peasant.energyLevel -= energyRequired;
                     peasant.foodLevel -= foodRequired;
                     jobDone = true;
+                    jobService.jobList.Remove(this);
                 }
             }
             else
@@ -63,6 +66,7 @@ public class GatherJob : Job
                     peasant.energyLevel -= energyRequired;
                     peasant.foodLevel -= foodRequired;
                     jobDone = true;
+                    jobService.jobList.Remove(this);
                 }
                 //TODO Turn Peasant towards target
                 peasant.animator.SetBool("isSwinging", true);
