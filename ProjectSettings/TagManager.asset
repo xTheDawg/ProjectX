@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Undefined
   - Tree
+  - Resource
+  - Field
+  - House
+  - Stone
   - Rock
   layers:
   - Default

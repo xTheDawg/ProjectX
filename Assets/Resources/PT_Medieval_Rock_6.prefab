@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7925628479987808846}
   m_Layer: 0
   m_Name: PT_Medieval_Rock_6
-  m_TagString: Rock
+  m_TagString: Stone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
