@@ -24,48 +24,88 @@ public class GatherJob : Job
 
     public override void DoJob()
     {
-        // If peasant is not at desired location yet, set target.
-        if (resourceObject != null && !peasant.CheckPosition(resourceObject.transform.position) && peasant.inventory[resourceType] < Globals.inventoryCapacity)
+        //Check if assigned resource still exists
+        if (resourceObject != null)
         {
-            peasant.target = resourceObject.transform.position;
-        }
-        else
-        {
-            if (peasant.inventory[resourceType] >= Globals.inventoryCapacity || resourceObject == null)
+            //Check if Inventory is not yet full
+            if (peasant.inventory[resourceType] < Globals.inventoryCapacity)
             {
-                peasant.animator.SetBool("isSwinging", false);
-                if (!peasant.CheckPosition(Globals.storageLocation))
+                //Check if player is at the resource location
+                if (peasant.CheckPosition(resourceObject.transform.position))
                 {
-                    peasant.target = Globals.storageLocation;
+                    //Start harvesting the resouce
+                    //TODO Turn Peasant towards target
+                    HarverstResource();
                 }
-                //TODO Turn Peasant towards target
-                peasant.animator.SetBool("isPickingUp", true);
-                timer += Time.deltaTime;
-                if (timer >= 6f)
+                else
                 {
-                    peasant.animator.SetBool("isPickingUp", false);
-                    storageService.PutResource(resourceType, peasant.inventory[resourceType]);
-                    peasant.inventory[resourceType] = 0;
-                    
-                    // Lower energy and food level when job execution is done
-                    peasant.energyLevel -= energyRequired;
-                    peasant.foodLevel -= foodRequired;
-                    jobDone = true;
-                    jobService.jobList.Remove(this);
+                    //Set players target to the location of the resource
+                    peasant.target = resourceObject.transform.position;
                 }
             }
             else
             {
-                //TODO Turn Peasant towards target
-                peasant.animator.SetBool("isSwinging", true);
-                timer += Time.deltaTime;
-                if (timer >= 3.25f)
+                //Check if player has arrived at the Storage Building
+                if (peasant.CheckPosition(Globals.storageLocation))
                 {
-                    Debug.Log("Harvesting resource of type: " + resourceType);
-                    peasant.inventory[resourceType] += resourceObject.GetComponent<ResourceController>().HarvestResource(50);
-                    timer = 0;
+                    //Store the Resource in the players inventory inside the storage building
+                    //TODO Turn Peasant towards target
+                    StoreInventory();
+                    if (peasant.inventory[resourceType] == 0)
+                    {
+                        // Lower energy and food level when job execution is done
+                        peasant.energyLevel -= energyRequired;
+                        peasant.foodLevel -= foodRequired;
+                        jobDone = true;
+                        jobService.jobList.Remove(this);
+                    }
+                }
+                else
+                {
+                    //Set players target to the Storage Building location
+                    peasant.target = Globals.storageLocation;
                 }
             }
+        }
+        else
+        {
+            //Assign new resource to job
+            resourceObject = resourceService.FindClosestResourceOfType(Globals.storageLocation, resourceType);
+        }
+    }
+    
+    private void HarverstResource()
+    {
+        peasant.animator.SetBool("isSwinging", true);
+        timer += Time.deltaTime;
+        if (timer >= 3.25f)
+        {
+            Debug.Log("Harvesting resource of type: " + resourceType);
+            
+            //Check how much the player can harvest based on inventory capacity
+            int harvestAmount = 50;
+            if ((Globals.inventoryCapacity - peasant.inventory[resourceType]) < harvestAmount)
+            {
+                harvestAmount = Globals.inventoryCapacity - peasant.inventory[resourceType];
+            }
+            
+            peasant.inventory[resourceType] += resourceObject.GetComponent<ResourceController>().HarvestResource(harvestAmount);
+            
+            //Reset timer and animation
+            timer = 0;
+            peasant.animator.SetBool("isSwinging", false);
+        }
+    }
+    
+    private void StoreInventory()
+    {
+        peasant.animator.SetBool("isPickingUp", true);
+        timer += Time.deltaTime;
+        if (timer >= 6f)
+        {
+            peasant.animator.SetBool("isPickingUp", false);
+            storageService.PutResource(resourceType, peasant.inventory[resourceType]);
+            peasant.inventory[resourceType] = 0;
         }
     }
 }

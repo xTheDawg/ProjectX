@@ -69,7 +69,7 @@ public class ResourceSpawnController : MonoBehaviour
                         validPosition = false;
                     }
                     //The position is too close to the center
-                    if (Vector3.Distance(position,Vector3.zero) < 50)
+                    if (Vector3.Distance(position,Vector3.zero) < 15)
                     {
                         validPosition = false;
                     }

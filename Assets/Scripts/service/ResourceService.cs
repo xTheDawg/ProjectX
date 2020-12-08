@@ -7,8 +7,6 @@ public class ResourceService
 {
     private static ResourceService instance = null;
     private static readonly object padlock = new object();
-    
-    private float distanceToClosestResource = Mathf.Infinity;
 
     private ResourceController[] allResourcesOfType;
     private List<GameObject> activeObjects = new List<GameObject>();
