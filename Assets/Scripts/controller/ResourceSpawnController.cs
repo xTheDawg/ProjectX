@@ -8,7 +8,8 @@ public class ResourceSpawnController : MonoBehaviour
     public GameObject treePrefab;
     public GameObject stonePrefab;
     private GameObject spawnedObject;
-    private List<GameObject> activeObjects = new List<GameObject>();
+    
+    public ResourceService resourceService = ResourceService.GetInstance();
 
     private float objectCheckRadius = 5f;
     private int maxSpawnAttemptsPerObject = 5;
@@ -18,9 +19,11 @@ public class ResourceSpawnController : MonoBehaviour
     void Start()
     {
         treePrefab = Resources.Load("PT_Medieval_Tree_1") as GameObject;
-        treePrefab.AddComponent<TreeController>();
+        treePrefab.AddComponent<ResourceController>();
+        treePrefab.tag = "Tree";
         stonePrefab = Resources.Load("PT_Medieval_Rock_6") as GameObject;
-        stonePrefab.AddComponent<StoneController>();
+        stonePrefab.AddComponent<ResourceController>();
+        stonePrefab.tag = "Stone";
 
         SpawnResources(treePrefab, 100);
         SpawnResources(stonePrefab, 50);
@@ -76,7 +79,7 @@ public class ResourceSpawnController : MonoBehaviour
             if (validPosition)
             {
                 spawnedObject = Instantiate(toSpawn, position, new Quaternion(0, Random.Range(0, 360), 0, 0));
-                activeObjects.Add(spawnedObject);
+                resourceService.AddActiveResource(spawnedObject);
             }
         }
     }

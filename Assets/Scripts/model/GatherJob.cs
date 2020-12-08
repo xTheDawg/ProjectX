@@ -2,14 +2,13 @@
 
 public class GatherJob : Job
 {
-    public ResourceType resourceType;
-    
-    public ResourceHelper resourceHelper = new ResourceHelper();
+    private ResourceType resourceType;
 
-    private float timer = 0;
     private StorageService storageService = StorageService.GetInstance();
-    
+    public ResourceService resourceService = ResourceService.GetInstance();
     private JobService jobService = JobService.GetInstance();
+    
+    private float timer = 0;
     
     public GatherJob()
     {
@@ -18,7 +17,7 @@ public class GatherJob : Job
     public GatherJob(int priority, ResourceType resourceType, int energyRequired, int foodRequired) {
         this.priority = priority;
         this.resourceType = resourceType;
-        resourceObject = resourceHelper.FindClosestResource(Globals.storageLocation, resourceType);
+        resourceObject = resourceService.FindClosestResourceOfType(Globals.storageLocation, resourceType);
         this.energyRequired = energyRequired;
         this.foodRequired = foodRequired;
     }
@@ -63,7 +62,7 @@ public class GatherJob : Job
                 if (timer >= 3.25f)
                 {
                     Debug.Log("Harvesting resource of type: " + resourceType);
-                    peasant.inventory[resourceType] += resourceObject.HarvestResource(50);
+                    peasant.inventory[resourceType] += resourceObject.GetComponent<ResourceController>().HarvestResource(50);
                     timer = 0;
                 }
             }

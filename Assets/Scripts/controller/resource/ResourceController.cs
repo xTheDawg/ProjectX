@@ -1,11 +1,31 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ResourceController : MonoBehaviour
 {
-    protected GameObject resource { get; set;}
-    protected int resourceAmount;
+    private int resourceAmount;
+    
+    public ResourceService resourceService = ResourceService.GetInstance();
+
+    private void Awake()
+    {
+        switch (gameObject.tag)
+        {
+            case "Tree":
+                resourceAmount = Random.Range(100, 200);
+                break;
+            case "Stone":
+                resourceAmount = Random.Range(50, 100);
+                break;
+            case "Field":
+                resourceAmount = Random.Range(300, 500);
+                break;
+        }
+    }
 
     public int HarvestResource(int amount)
     {
@@ -14,6 +34,8 @@ public class ResourceController : MonoBehaviour
         {
             amount += resourceAmount;
             resourceAmount = 0;
+            
+            resourceService.RemoveActiveResource(gameObject);
             Destroy(gameObject);
         }
 

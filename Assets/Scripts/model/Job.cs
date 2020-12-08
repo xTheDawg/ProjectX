@@ -2,7 +2,7 @@
 
 public abstract class Job {
     public int priority {get; set;}
-    public ResourceController resourceObject {get; set;}
+    public GameObject resourceObject {get; set;}
     public int energyRequired {get; set;}
     public int foodRequired {get; set;}
     public bool jobDone {get; set;}

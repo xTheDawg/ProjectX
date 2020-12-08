@@ -2,7 +2,6 @@
 
 public class DoJobAction : ActionNode
 {
-    private ResourceHelper resourceHelper = new ResourceHelper();
     private JobService jobService = JobService.GetInstance();
 
     public override NodeState Execute()
