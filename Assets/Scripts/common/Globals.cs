@@ -13,6 +13,10 @@ public static class Globals {
     public static float rotSpeed {get; set;} = 5f;
 
     // Resource
+    public static int maxSpawnRadius = 130;
+    public static int maxStructureDistance = 50;
+    public static int minStorageDistance = 10;
+    public static float structureCheckDistance = 8f;
 
     // Storage
     public static Vector3 storageLocation {get; set;} = new Vector3(-1.5f,0,-1);

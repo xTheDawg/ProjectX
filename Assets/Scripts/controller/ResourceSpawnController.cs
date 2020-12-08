@@ -9,17 +9,15 @@ public class ResourceSpawnController : MonoBehaviour
 {
     private GameObject treePrefab;
     private GameObject stonePrefab;
-    private GameObject fieldPrefabA;
-    private GameObject fieldPrefabB;
-    private GameObject housePrefab;
+    public GameObject fieldPrefabA;
+    public GameObject fieldPrefabB;
+    public GameObject housePrefab;
+    public GameObject placeHolderPrefab;
     private GameObject spawnedObject;
     
     public ResourceService resourceService = ResourceService.GetInstance();
     
     private int maxSpawnAttemptsPerObject = 5;
-    private int maxSpawnRadius = 130;
-    private int minStorageDistance = 10;
-    private int maxStructureDistance = 50;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +37,8 @@ public class ResourceSpawnController : MonoBehaviour
         housePrefab = Resources.Load("House_Villager") as GameObject;
         //TODO Add Scriptcomponent to house Prefab
         housePrefab.tag = "House";
-        
+        placeHolderPrefab = Resources.Load("Placeholder/Placeholder") as GameObject;
+
         SpawnGroup(treePrefab,50, 15, 2.5f);
         SpawnGroup(treePrefab,10, 7, 2f);
         SpawnGroup(treePrefab,10, 7, 2f);
@@ -66,7 +65,7 @@ public class ResourceSpawnController : MonoBehaviour
         for (int i = 0; i < amount; i++)
         {
             Vector3 position;
-            if (Vector3.zero != (position = GetValidPosition(Vector3.zero, maxSpawnRadius, 5f, false)))
+            if (Vector3.zero != (position = GetValidPosition(Vector3.zero, Globals.maxSpawnRadius, 5f, false)))
             {
                 SpawnObject(toSpawn, position, new Quaternion(0, Random.Range(0, 360), 0, 0));
             }
@@ -123,14 +122,14 @@ public class ResourceSpawnController : MonoBehaviour
                     validPosition = false;
                 }
                 //The position is too close to the center
-                if (Vector3.Distance(position,Vector3.zero) < minStorageDistance)
+                if (Vector3.Distance(position,Vector3.zero) < Globals.minStorageDistance)
                 {
                     validPosition = false;
                 }
 
                 if (isStructure)
                 {
-                    if (Vector3.Distance(position,Vector3.zero) > maxStructureDistance)
+                    if (Vector3.Distance(position,Vector3.zero) > Globals.maxStructureDistance)
                     {
                         validPosition = false;
                     }

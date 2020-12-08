@@ -4,12 +4,9 @@ public class GatherJob : Job
 {
     private ResourceType resourceType;
 
-    private StorageService storageService = StorageService.GetInstance();
+    
     public ResourceService resourceService = ResourceService.GetInstance();
-    private JobService jobService = JobService.GetInstance();
-    
-    private float timer = 0;
-    
+
     public GatherJob()
     {
     }
@@ -20,6 +17,7 @@ public class GatherJob : Job
         resourceObject = resourceService.FindClosestResourceOfType(Globals.storageLocation, resourceType);
         this.energyRequired = energyRequired;
         this.foodRequired = foodRequired;
+        timer = 0;
     }
 
     public override void DoJob()
@@ -94,18 +92,6 @@ public class GatherJob : Job
             //Reset timer and animation
             timer = 0;
             peasant.animator.SetBool("isSwinging", false);
-        }
-    }
-    
-    private void StoreInventory()
-    {
-        peasant.animator.SetBool("isPickingUp", true);
-        timer += Time.deltaTime;
-        if (timer >= 6f)
-        {
-            peasant.animator.SetBool("isPickingUp", false);
-            storageService.PutResource(resourceType, peasant.inventory[resourceType]);
-            peasant.inventory[resourceType] = 0;
         }
     }
 }
