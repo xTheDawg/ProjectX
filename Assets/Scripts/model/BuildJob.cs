@@ -26,11 +26,16 @@ public class BuildJob : Job
         switch (buildingType)
         {
             case BuildingType.HOUSE:
+                woodRequired = 100;
+                stoneRequired = 100;
                 toSpawn = resourceSpawnController.housePrefab;
                 break;
             case BuildingType.FARM:
+                woodRequired = 100;
+                stoneRequired = 50;
                 if (Random.Range(0f,1f) >= 0.5f)
                 {
+                    
                     toSpawn = resourceSpawnController.fieldPrefabA;
                     break;
                 }
@@ -171,6 +176,11 @@ public class BuildJob : Job
             {
                 peasant.inventory[ResourceType.STONE] -= stoneRequired;
                 stoneRequired = 0;
+            }
+
+            if (woodRequired == 0 && stoneRequired == 0)
+            {
+                buildingDone = true;
             }
 
             //Reset the timer

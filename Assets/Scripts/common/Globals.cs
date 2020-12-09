@@ -9,7 +9,7 @@ public static class Globals {
     public static int energyCritical {get; set;} = 20;
     public static int energyGameStart {get; set;} = 100;
     public static int inventoryCapacity {get; set;} = 100;
-    public static float walkSpeed {get; set;} = 3f;
+    public static float walkSpeed {get; set;} = 10f;
     public static float rotSpeed {get; set;} = 5f;
 
     // Resource
@@ -20,8 +20,8 @@ public static class Globals {
 
     // Storage
     public static Vector3 storageLocation {get; set;} = new Vector3(-1.5f,0,-1);
-    public static int storageGameStartWood {get; set;} = 200;
-    public static int storageGameStartStone {get; set;} = 200;
+    public static int storageGameStartWood {get; set;} = 1000;
+    public static int storageGameStartStone {get; set;} = 500;
     public static int storageGameStartFood {get; set;} = 200;
     
     // Energy Required
