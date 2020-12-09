@@ -5,6 +5,7 @@ public class BuildJob : Job
     private BuildingType buildingType;
     private Vector3 position;
     private Quaternion rotation;
+    private GameObject toSpawn;
     private ResourceSpawnController resourceSpawnController = GameObject.FindObjectOfType<ResourceSpawnController>();
 
     private int woodRequired;
@@ -21,6 +22,22 @@ public class BuildJob : Job
             Globals.structureCheckDistance, true);
         rotation = resourceSpawnController.GetCenterRotation(position);
         timer = 0;
+
+        switch (buildingType)
+        {
+            case BuildingType.HOUSE:
+                toSpawn = resourceSpawnController.housePrefab;
+                break;
+            case BuildingType.FARM:
+                if (Random.Range(0f,1f) >= 0.5f)
+                {
+                    toSpawn = resourceSpawnController.fieldPrefabA;
+                    break;
+                }
+
+                toSpawn = resourceSpawnController.fieldPrefabB;
+                break;
+        }
     }
 
     public override void DoJob()
@@ -31,6 +48,7 @@ public class BuildJob : Job
             if (Vector3.zero != position)
             {
                 resourceSpawnController.SpawnObject(resourceSpawnController.placeHolderPrefab, position, rotation);
+                resourceObject = resourceSpawnController.GetSpawnObject();
                 spawnPlaceholder = false;
             }
             else
@@ -47,10 +65,20 @@ public class BuildJob : Job
             {
                 if (peasant.CheckPosition(Globals.storageLocation))
                 {
+                    //Store inventory in storage
                     StoreInventory();
                     
-                    //TODO Remove Placeholder
-                    //TODO Place Structure
+                    //Remove Placeholder
+                    resourceSpawnController.DestroyObject(resourceObject);
+                    
+                    //Spawn finished structure
+                    resourceSpawnController.SpawnObject(toSpawn, position, rotation);
+                    
+                    //finish Job
+                    peasant.energyLevel -= energyRequired;
+                    peasant.foodLevel -= foodRequired;
+                    jobDone = true;
+                    jobService.jobList.Remove(this);
                 }
                 else
                 {
@@ -88,7 +116,10 @@ public class BuildJob : Job
         }
         else
         {
-            //TODO End Job without reducing values
+            //End Job without reducing values
+            Debug.LogError("Job could not be executed properly!");
+            jobDone = true;
+            jobService.jobList.Remove(this);
         }
     }
     

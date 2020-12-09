@@ -4,9 +4,6 @@ public class GatherJob : Job
 {
     private ResourceType resourceType;
 
-    
-    public ResourceService resourceService = ResourceService.GetInstance();
-
     public GatherJob()
     {
     }

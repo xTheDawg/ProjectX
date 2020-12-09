@@ -38,7 +38,7 @@ public class ResourceSpawnController : MonoBehaviour
         //TODO Add Scriptcomponent to house Prefab
         housePrefab.tag = "House";
         placeHolderPrefab = Resources.Load("Placeholder/Placeholder") as GameObject;
-
+        
         SpawnGroup(treePrefab,50, 15, 2.5f);
         SpawnGroup(treePrefab,10, 7, 2f);
         SpawnGroup(treePrefab,10, 7, 2f);
@@ -57,6 +57,17 @@ public class ResourceSpawnController : MonoBehaviour
     {
         spawnedObject = Instantiate(toSpawn, position, rotation);
         resourceService.AddActiveResource(spawnedObject);
+    }
+    
+    public GameObject GetSpawnObject()
+    {
+        return spawnedObject;
+    }
+    
+    public void DestroyObject(GameObject toDestroy)
+    {
+        resourceService.RemoveActiveResource(toDestroy);
+        Destroy(toDestroy);
     }
     
     //Method to spawn resources in Scene

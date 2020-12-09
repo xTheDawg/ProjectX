@@ -12,7 +12,7 @@ public abstract class Job {
     
     protected JobService jobService = JobService.GetInstance();
     protected StorageService storageService = StorageService.GetInstance();
-
+    protected ResourceService resourceService = ResourceService.GetInstance();
 
     public Job()
     {
