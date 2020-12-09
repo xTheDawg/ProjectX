@@ -13,6 +13,7 @@ public class ResourceSpawnController : MonoBehaviour
     public GameObject fieldPrefabB;
     public GameObject housePrefab;
     public GameObject placeHolderPrefab;
+    public GameObject peasantPrefab;
     private GameObject spawnedObject;
     
     public ResourceService resourceService = ResourceService.GetInstance();
@@ -22,6 +23,7 @@ public class ResourceSpawnController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Structure Prefabs
         treePrefab = Resources.Load("PT_Medieval_Tree_1") as GameObject;
         treePrefab.AddComponent<ResourceController>();
         treePrefab.tag = "Tree";
@@ -35,10 +37,17 @@ public class ResourceSpawnController : MonoBehaviour
         fieldPrefabB.AddComponent<ResourceController>();
         fieldPrefabB.tag = "Field";
         housePrefab = Resources.Load("House_Villager") as GameObject;
-        //TODO Add Scriptcomponent to house Prefab
+        //housePrefab.AddComponent<HouseController>();
         housePrefab.tag = "House";
         placeHolderPrefab = Resources.Load("Placeholder/Placeholder") as GameObject;
         
+        //Player prefab
+        peasantPrefab = Resources.Load("Characters/Prefabs/PT_Medieval_Male_Peasant_01_a") as GameObject;
+        peasantPrefab.AddComponent<Peasant>();
+        peasantPrefab.GetComponent<Animator>().runtimeAnimatorController = 
+            Resources.Load("Characters/Prefabs/PT_Medieval_Male_Peasant_01_a_Animator Controller") as RuntimeAnimatorController;
+        peasantPrefab.tag = "Player";
+
         SpawnGroup(treePrefab,50, 15, 2.5f);
         SpawnGroup(treePrefab,10, 7, 2f);
         SpawnGroup(treePrefab,10, 7, 2f);
@@ -57,6 +66,10 @@ public class ResourceSpawnController : MonoBehaviour
     {
         spawnedObject = Instantiate(toSpawn, position, rotation);
         resourceService.AddActiveResource(spawnedObject);
+        if (spawnedObject.tag.Equals("Player"))
+        {
+            Animator animator = spawnedObject.GetComponent<Animator>();
+        }
     }
     
     public GameObject GetSpawnObject()

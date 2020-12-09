@@ -9,14 +9,14 @@ public static class Globals {
     public static int energyCritical {get; set;} = 20;
     public static int energyGameStart {get; set;} = 100;
     public static int inventoryCapacity {get; set;} = 100;
-    public static float walkSpeed {get; set;} = 10f;
+    public static float walkSpeed {get; set;} = 3f;
     public static float rotSpeed {get; set;} = 5f;
 
     // Resource
     public static int maxSpawnRadius = 130;
     public static int maxStructureDistance = 50;
     public static int minStorageDistance = 10;
-    public static float structureCheckDistance = 8f;
+    public static float structureCheckDistance = 12f;
 
     // Storage
     public static Vector3 storageLocation {get; set;} = new Vector3(-1.5f,0,-1);

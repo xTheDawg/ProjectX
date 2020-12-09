@@ -79,6 +79,10 @@ public class BuildJob : Job
                     //Spawn finished structure
                     resourceSpawnController.SpawnObject(toSpawn, position, rotation);
                     
+                    //Spawn new Peasant
+                    resourceSpawnController.SpawnObject(resourceSpawnController.peasantPrefab, 
+                        resourceSpawnController.GetValidPosition(position,30,5,false), rotation);
+                    
                     //finish Job
                     peasant.energyLevel -= energyRequired;
                     peasant.foodLevel -= foodRequired;

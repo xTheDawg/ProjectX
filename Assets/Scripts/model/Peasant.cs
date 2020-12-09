@@ -59,9 +59,9 @@ public class Peasant : MonoBehaviour
         position = transform.position;
         rotation = transform.rotation;
         fatigueTimer += Time.deltaTime;
-        if (fatigueTimer > 2f)
+        if (fatigueTimer > 10f)
         {
-            fatigueTimer = fatigueTimer - 2f;
+            fatigueTimer = fatigueTimer - 10f;
             if (!animator.GetBool("isResting") && !animator.GetBool("isEating"))
             {
                 if (foodLevel <= 0)
