@@ -14,7 +14,7 @@ public static class Globals {
 
     // Resource
     public static int maxSpawnRadius = 130;
-    public static int maxStructureDistance = 50;
+    public static int maxStructureDistance = 30;
     public static int minStorageDistance = 10;
     public static float structureCheckDistance = 12f;
 
@@ -22,7 +22,7 @@ public static class Globals {
     public static Vector3 storageLocation {get; set;} = new Vector3(-1.5f,0,-1);
     public static int storageGameStartWood {get; set;} = 900;
     public static int storageGameStartStone {get; set;} = 400;
-    public static int storageGameStartFood {get; set;} = 200;
+    public static int storageGameStartFood {get; set;} = 300;
     
     // Energy Required
     public static int energyRequiredBuildFarm {get; set;} = 30;
@@ -43,8 +43,8 @@ public static class Globals {
     public static int priorityGatherStone {get; set;} = 4;
     
     //ReplaySpeed
-    public static float walkSpeedMultiplier = 5.0f;
-    public static float actionCompleteDelay = 0f;
-    public static float dayNightSpeed = 15f;
+    public static float walkSpeedMultiplier = 3.0f;
+    public static float actionCompleteDelay = 0.3f;
+    public static float dayNightSpeed = 0.3f;
 
 }
