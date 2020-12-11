@@ -20,8 +20,8 @@ public static class Globals {
 
     // Storage
     public static Vector3 storageLocation {get; set;} = new Vector3(-1.5f,0,-1);
-    public static int storageGameStartWood {get; set;} = 1000;
-    public static int storageGameStartStone {get; set;} = 500;
+    public static int storageGameStartWood {get; set;} = 900;
+    public static int storageGameStartStone {get; set;} = 400;
     public static int storageGameStartFood {get; set;} = 200;
     
     // Energy Required
@@ -41,4 +41,9 @@ public static class Globals {
     public static int priorityBuildHouse {get; set;} = 2;
     public static int priorityGatherWood {get; set;} = 3;
     public static int priorityGatherStone {get; set;} = 4;
+    
+    //ReplaySpeed
+    public static float walkSpeedMultiplier = 5.0f;
+    public static float actionCompleteDelay = 0f;
+    
 }

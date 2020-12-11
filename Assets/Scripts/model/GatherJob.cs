@@ -73,10 +73,8 @@ public class GatherJob : Job
     {
         peasant.animator.SetBool("isSwinging", true);
         timer += Time.deltaTime;
-        if (timer >= 3.25f)
+        if (timer >= 3.25f * Globals.actionCompleteDelay)
         {
-            Debug.Log("Harvesting resource of type: " + resourceType);
-            
             //Check how much the player can harvest based on inventory capacity
             int harvestAmount = 50;
             if ((Globals.inventoryCapacity - peasant.inventory[resourceType]) < harvestAmount)

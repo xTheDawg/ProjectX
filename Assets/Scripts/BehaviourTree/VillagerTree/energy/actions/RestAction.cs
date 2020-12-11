@@ -12,11 +12,10 @@ public class RestAction : ActionNode
         {
             isRegenerating = true;
             restStartTime = Time.time;
-            GetPeasant().animator.SetBool("isWalking", false);
             GetPeasant().animator.SetBool("isResting", true);
         }
 
-        if (Time.time - restStartTime > 5f)
+        if (Time.time - restStartTime > 5f * Globals.actionCompleteDelay)
         {
             GetPeasant().energyLevel = GetPeasant().maxEnergyLevel;
             GetPeasant().animator.SetBool("isResting", false);

@@ -136,7 +136,7 @@ public class BuildJob : Job
     {
         peasant.animator.SetBool("isPickingUp", true);
         timer += Time.deltaTime;
-        if (timer >= 6f)
+        if (timer >= 6f * Globals.actionCompleteDelay)
         {
             peasant.animator.SetBool("isPickingUp", false);
             
@@ -156,7 +156,7 @@ public class BuildJob : Job
     {
         peasant.animator.SetBool("isBuilding", true);
         timer += Time.deltaTime;
-        if (timer >= 8f)
+        if (timer >= 8f * Globals.actionCompleteDelay)
         {
             peasant.animator.SetBool("isBuilding", false);
 

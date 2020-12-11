@@ -24,7 +24,7 @@ public abstract class Job {
     {
         peasant.animator.SetBool("isPickingUp", true);
         timer += Time.deltaTime;
-        if (timer >= 6f)
+        if (timer >= 6f * Globals.actionCompleteDelay)
         {
             peasant.animator.SetBool("isPickingUp", false);
             storageService.PutResource(ResourceType.WOOD, peasant.inventory[ResourceType.WOOD]);

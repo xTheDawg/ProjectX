@@ -13,11 +13,10 @@ public class EatAction : ActionNode
         {
             isEating = true;
             eatStartTime = Time.time;
-            GetPeasant().animator.SetBool("isWalking", false);
             GetPeasant().animator.SetBool("isEating", true);
         }
         
-        if (Time.time - eatStartTime > 5f)
+        if (Time.time - eatStartTime > 5f * Globals.actionCompleteDelay)
         {
             GetPeasant().foodLevel = GetPeasant().maxFoodLevel;
             GetPeasant().animator.SetBool("isEating", false);

@@ -21,44 +21,44 @@ public class ResourceSpawnController : MonoBehaviour
     private int maxSpawnAttemptsPerObject = 5;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        //Structure Prefabs
+        //Resource Prefabs
         treePrefab = Resources.Load("PT_Medieval_Tree_1") as GameObject;
-        treePrefab.AddComponent<ResourceController>();
         treePrefab.tag = "Tree";
         stonePrefab = Resources.Load("PT_Medieval_Rock_6") as GameObject;
-        stonePrefab.AddComponent<ResourceController>();
         stonePrefab.tag = "Stone";
         fieldPrefabA = Resources.Load("CarrotFarm") as GameObject;
-        fieldPrefabA.AddComponent<ResourceController>();
         fieldPrefabA.tag = "Field";
         fieldPrefabB = Resources.Load("PotatoFarm") as GameObject;
-        fieldPrefabB.AddComponent<ResourceController>();
         fieldPrefabB.tag = "Field";
+        
+        //Structure Prefabs
         housePrefab = Resources.Load("House_Villager") as GameObject;
-        //housePrefab.AddComponent<HouseController>();
         housePrefab.tag = "House";
         placeHolderPrefab = Resources.Load("Placeholder/Placeholder") as GameObject;
         
         //Player prefab
         peasantPrefab = Resources.Load("Characters/Prefabs/PT_Medieval_Male_Peasant_01_a") as GameObject;
-        peasantPrefab.AddComponent<Peasant>();
         peasantPrefab.GetComponent<Animator>().runtimeAnimatorController = 
             Resources.Load("Characters/Prefabs/PT_Medieval_Male_Peasant_01_a_Animator Controller") as RuntimeAnimatorController;
         peasantPrefab.tag = "Player";
 
-        SpawnGroup(treePrefab,50, 15, 2.5f);
-        SpawnGroup(treePrefab,10, 7, 2f);
-        SpawnGroup(treePrefab,10, 7, 2f);
-        SpawnGroup(treePrefab,10, 7, 2f);
-        SpawnGroup(treePrefab,15, 8, 2f);
+        //Spawn Initial Peasant
+        SpawnObject(peasantPrefab, Globals.storageLocation, GetCenterRotation(Globals.storageLocation));
+        //Spawn Groups of Trees and Stones
+        SpawnGroup(treePrefab,50, 15, 3.5f);
+        SpawnGroup(treePrefab,10, 7, 3f);
+        SpawnGroup(treePrefab,10, 7, 3f);
+        SpawnGroup(treePrefab,10, 7, 3f);
+        SpawnGroup(treePrefab,15, 8, 3f);
         SpawnGroup(treePrefab,60, 25, 5f);
-        SpawnGroup(treePrefab,20, 10, 1.5f);
-        SpawnGroup(stonePrefab,10, 10, 8f);
-        SpawnGroup(stonePrefab,5, 8, 10f);
+        SpawnGroup(treePrefab,20, 10, 2.5f);
+        SpawnGroup(stonePrefab,10, 10, 5f);
+        SpawnGroup(stonePrefab,5, 8, 5f);
 
-        SpawnResources(treePrefab, 50);
+        //Spawn Single Resource Objects
+        SpawnResources(treePrefab, 100);
         SpawnResources(stonePrefab, 30);
     }
     
@@ -128,32 +128,52 @@ public class ResourceSpawnController : MonoBehaviour
                 
             //Pick a random position in an Area
             position = new Vector3(spawnPoint.x + Random.Range(-spawnRadius, spawnRadius), 0, spawnPoint.z + Random.Range(-spawnRadius, spawnRadius));
-
-            //Array of all colliders within our Object check radius
-            Collider[] colliders = Physics.OverlapSphere(position, objectCheckRadius);
-
-            //Check valid position based on colliding tags and desired spawn Area
-            foreach (var collider in colliders)
+            
+            //The position is too close to the center
+            if (Vector3.Distance(Vector3.zero, position) < Globals.minStorageDistance)
             {
-                //A treeCollider is within the Radius
-                if (collider.tag.Equals("Tree"))
-                {
-                    validPosition = false;
-                }
-                //A stoneCollider is within the Radius
-                if (collider.tag.Equals("Stone"))
-                {
-                    validPosition = false;
-                }
-                //The position is too close to the center
-                if (Vector3.Distance(position,Vector3.zero) < Globals.minStorageDistance)
-                {
-                    validPosition = false;
-                }
+                validPosition = false;
+            }
 
-                if (isStructure)
+            //Check if the position was outside of the structure area
+            if (isStructure)
+            {
+                if (Vector3.Distance(position,Vector3.zero) < Globals.maxStructureDistance)
                 {
-                    if (Vector3.Distance(position,Vector3.zero) > Globals.maxStructureDistance)
+                    validPosition = false;
+                }
+            }
+
+            if (validPosition)
+            {
+                //Array of all colliders within our Object check radius
+                Collider[] colliders = Physics.OverlapSphere(position, objectCheckRadius);
+
+                //Check valid position based on colliding tags and desired spawn Area
+                foreach (var collider in colliders)
+                {
+                    //A treeCollider is within the Radius
+                    if (collider.tag.Equals("Tree"))
+                    {
+                        validPosition = false;
+                    }
+                    //A stoneCollider is within the Radius
+                    if (collider.tag.Equals("Stone"))
+                    {
+                        validPosition = false;
+                    }
+                    //A houseCollider is within the Radius
+                    if (collider.tag.Equals("House"))
+                    {
+                        validPosition = false;
+                    }
+                    //A playerCollider is within the Radius
+                    if (collider.tag.Equals("Player"))
+                    {
+                        validPosition = false;
+                    }
+                    //A fieldCollider is within the Radius
+                    if (collider.tag.Equals("Field"))
                     {
                         validPosition = false;
                     }
@@ -161,9 +181,9 @@ public class ResourceSpawnController : MonoBehaviour
             }
         }
 
-        if (position == Vector3.zero)
+        if (!validPosition)
         {
-            Debug.LogError("No position has been found");
+            return Vector3.zero;
         }
         return position;
     }
@@ -178,7 +198,7 @@ public class ResourceSpawnController : MonoBehaviour
             
             for (int i = 0; i < spawnAmount; i++)
             {
-                if (position != (spawnPosition = GetValidPosition(position, radius, objectCheckRadius, false)))
+                if (Vector3.zero != (spawnPosition = GetValidPosition(position, radius, objectCheckRadius, false)))
                 {
                     SpawnObject(toSpawn, spawnPosition, new Quaternion(0, Random.Range(0, 360), 0, 0));
                 }

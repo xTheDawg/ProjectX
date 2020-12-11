@@ -114,7 +114,7 @@ public class Peasant : MonoBehaviour
         RotatePlayer();
 
         // Move Peasant forward
-        transform.position += transform.forward * (walkSpeed * Time.deltaTime);
+        transform.position += transform.forward * ((walkSpeed * Globals.walkSpeedMultiplier) * Time.deltaTime );
 
         //Check if Player arrived at the destination
         if (CheckPosition(target))
