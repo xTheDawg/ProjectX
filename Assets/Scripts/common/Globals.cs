@@ -45,5 +45,6 @@ public static class Globals {
     //ReplaySpeed
     public static float walkSpeedMultiplier = 5.0f;
     public static float actionCompleteDelay = 0f;
-    
+    public static float dayNightSpeed = 15f;
+
 }
