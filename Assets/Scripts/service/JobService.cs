@@ -28,8 +28,12 @@ public sealed class JobService
     
     public Job GetJob(Peasant peasant)
     {
-        Job job = jobList.First();
-        job.peasant = peasant;
-        return job;
+        lock (jobList)
+        {
+            Job job = jobList.First();
+            jobList.Remove(job);
+            job.peasant = peasant;
+            return job;
+        }
     }
 }
