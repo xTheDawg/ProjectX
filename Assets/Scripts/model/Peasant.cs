@@ -18,7 +18,7 @@ public class Peasant : MonoBehaviour
     //Misc
     public Animator animator { get; set; }
     public Vector3 targetRotation { get; set; }
-    public RootSequence root { get; set; }
+    public RootSequence rootSequence { get; set; }
     public Vector3 position { get; set; }
     public Quaternion rotation { get; set; }
     public float fatigueTimer { get; set; } = 0f;
@@ -44,7 +44,7 @@ public class Peasant : MonoBehaviour
         angle = 15f;
         detectionDistance = 3f;
         target = Vector3.zero;
-        root = new RootSequence(this);
+        rootSequence = new RootSequence(this);
         animator = gameObject.GetComponent<Animator>();
         
         inventory[ResourceType.FOOD] = 0;
@@ -100,9 +100,9 @@ public class Peasant : MonoBehaviour
         }
     }
 
-    public void EvaluateTree()
+    private void EvaluateTree()
     {
-        root.Evaluate();
+        rootSequence.Evaluate();
     }
 
     public void GoToLocation()
