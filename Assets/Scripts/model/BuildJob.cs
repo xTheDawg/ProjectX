@@ -26,8 +26,8 @@ public class BuildJob : Job
         switch (buildingType)
         {
             case BuildingType.HOUSE:
-                woodRequired = 100;
-                stoneRequired = 100;
+                woodRequired = 300;
+                stoneRequired = 200;
                 toSpawn = resourceSpawnController.housePrefab;
                 break;
             case BuildingType.FARM:

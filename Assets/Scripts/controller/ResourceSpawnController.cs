@@ -37,6 +37,7 @@ public class ResourceSpawnController : MonoBehaviour
         housePrefab = Resources.Load("House_Villager") as GameObject;
         housePrefab.tag = "House";
         placeHolderPrefab = Resources.Load("Placeholder/Placeholder") as GameObject;
+        placeHolderPrefab.tag = "temp";
         
         //Player prefab
         peasantPrefab = Resources.Load("Characters/Prefabs/PT_Medieval_Male_Peasant_01_a") as GameObject;
@@ -59,7 +60,7 @@ public class ResourceSpawnController : MonoBehaviour
 
         //Spawn Single Resource Objects
         SpawnResources(treePrefab, 100);
-        SpawnResources(stonePrefab, 30);
+        SpawnResources(stonePrefab, 50);
     }
     
     public void SpawnObject(GameObject toSpawn, Vector3 position, Quaternion rotation)
@@ -174,6 +175,11 @@ public class ResourceSpawnController : MonoBehaviour
                     }
                     //A fieldCollider is within the Radius
                     if (collider.tag.Equals("Field"))
+                    {
+                        validPosition = false;
+                    }
+                    //A placeholderCollider is within the Radius
+                    if (collider.tag.Equals("temp"))
                     {
                         validPosition = false;
                     }
