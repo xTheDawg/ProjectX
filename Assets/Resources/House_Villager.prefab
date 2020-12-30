@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 3443019703052747131}
   - component: {fileID: 533828773482361717}
   m_Layer: 0
-  m_Name: House_Villager 1
+  m_Name: House_Villager
   m_TagString: House
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
