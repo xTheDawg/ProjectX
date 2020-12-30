@@ -43,8 +43,9 @@ public static class Globals {
     public static int priorityGatherStone {get; set;} = 4;
     
     //ReplaySpeed
-    public static float walkSpeedMultiplier = 3.0f;
-    public static float actionCompleteDelay = 0.3f;
-    public static float dayNightSpeed = 0.3f;
+    public static float animationSpeed = 1.0f;
+    public static float actionCompleteDelay = 1f;
+    public static float dayNightSpeed = 11f;
+    
 
 }
