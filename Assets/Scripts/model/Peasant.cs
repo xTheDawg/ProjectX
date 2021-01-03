@@ -47,6 +47,11 @@ public class Peasant : MonoBehaviour
         rootSequence = new RootSequence(this);
         animator = gameObject.GetComponent<Animator>();
         
+        //Player Camera
+        Camera camera = gameObject.GetComponentInChildren<Camera>();
+        camera.enabled = false;
+        camera.GetComponent<AudioListener>().enabled  =  false;
+        
         inventory[ResourceType.FOOD] = 0;
         inventory[ResourceType.WOOD] = 0;
         inventory[ResourceType.STONE] = 0;
