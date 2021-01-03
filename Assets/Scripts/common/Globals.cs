@@ -46,6 +46,4 @@ public static class Globals {
     public static float animationSpeed = 1.0f;
     public static float actionCompleteDelay = 1f;
     public static float dayNightSpeed = 11f;
-    
-
 }
