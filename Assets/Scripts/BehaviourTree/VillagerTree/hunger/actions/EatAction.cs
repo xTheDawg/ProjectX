@@ -18,11 +18,11 @@ public class EatAction : ActionNode
         
         if (Time.time - eatStartTime > 5f * Globals.actionCompleteDelay)
         {
-            GetPeasant().foodLevel = GetPeasant().maxFoodLevel;
             GetPeasant().animator.SetBool("isEating", false);
             isEating = false;
-            Debug.Log("Eating complete! Food Level is now at: " + GetPeasant().foodLevel);
             GetPeasant().foodLevel += storageService.TakeResource(ResourceType.FOOD, (Globals.foodMax - GetPeasant().foodLevel));
+            Debug.Log("Eating complete! Food Level is now at: " + GetPeasant().foodLevel);
+            Debug.Log("The amount of Food left in storage: " + storageService.resources[ResourceType.FOOD]);
             return NodeState.SUCCESS;
         }
         

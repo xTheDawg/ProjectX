@@ -18,7 +18,9 @@ public class ResourceSpawnController : MonoBehaviour
     
     public ResourceService resourceService = ResourceService.GetInstance();
     
-    private int maxSpawnAttemptsPerObject = 15;
+    private int maxSpawnAttemptsPerObject = 30;
+
+    private float timer = 0;
 
     // Start is called before the first frame update
     void Awake()
@@ -62,7 +64,18 @@ public class ResourceSpawnController : MonoBehaviour
         SpawnResources(treePrefab, 100);
         SpawnResources(stonePrefab, 50);
     }
-    
+
+    private void LateUpdate()
+    {
+        timer += Time.deltaTime;
+        if (timer > 60f)
+        {
+            SpawnResources(treePrefab, 5);
+            SpawnResources(stonePrefab, 3);
+            timer = 0f;
+        }
+    }
+
     public void SpawnObject(GameObject toSpawn, Vector3 position, Quaternion rotation)
     {
         spawnedObject = Instantiate(toSpawn, position, rotation);

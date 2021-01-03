@@ -4,7 +4,7 @@ public static class Globals {
     // Peasant
     public static int foodMax {get; set;} = 100;
     public static int foodCritical {get; set;} = 20;
-    public static int foodGameStart {get; set;} = 100;
+    public static int foodGameStart {get; set;} = 15;
     public static int energyMax {get; set;} = 100;
     public static int energyCritical {get; set;} = 20;
     public static int energyGameStart {get; set;} = 100;

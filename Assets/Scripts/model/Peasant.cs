@@ -114,6 +114,12 @@ public class Peasant : MonoBehaviour
     {
         //Set walking Animation for Player
         animator.SetBool("isWalking", true);
+        animator.SetBool("isResting", false);
+        animator.SetBool("isEating", false);
+        animator.SetBool("isPickingUp", false);
+        animator.SetBool("isBuilding", false);
+        animator.SetBool("isHarvesting", false);
+        animator.SetBool("isSwinging", false);
 
         //Rotate Peasant before moving
         RotatePlayer();

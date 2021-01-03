@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GatherJob : Job
 {
@@ -11,7 +13,7 @@ public class GatherJob : Job
     public GatherJob(int priority, ResourceType resourceType, int energyRequired, int foodRequired) {
         this.priority = priority;
         this.resourceType = resourceType;
-        resourceObject = resourceService.FindClosestResourceOfType(Globals.storageLocation, resourceType);
+        resourceObject = resourceService.FindClosestResourceOfType(new Vector3(Random.Range(-15, 15),0,Random.Range(-15, 15)), resourceType);
         this.energyRequired = energyRequired;
         this.foodRequired = foodRequired;
         timer = 0;
