@@ -59,6 +59,10 @@ public class BuildJob : Job
             else
             {
                 Debug.LogError("No valid position for structure found!");
+                if (Globals.maxStructureDistance < 75)
+                {
+                    Globals.maxStructureDistance = Globals.maxStructureDistance + 5;
+                }
             }
         }
 
@@ -80,7 +84,7 @@ public class BuildJob : Job
 
                     //Spawn new Peasant
                     resourceSpawnController.SpawnObject(resourceSpawnController.peasantPrefab,
-                        resourceSpawnController.GetValidPosition(position, 30, 5, false), rotation);
+                        resourceSpawnController.GetValidPosition(position, 15, 5, false), rotation);
 
                     //finish Job
                     peasant.energyLevel -= energyRequired;

@@ -14,7 +14,7 @@ public static class Globals {
 
     // Resource
     public static int maxSpawnRadius = 130;
-    public static int maxStructureDistance = 30;
+    public static int maxStructureDistance {get; set;} = 30;
     public static int minStorageDistance = 10;
     public static float structureCheckDistance = 12f;
 

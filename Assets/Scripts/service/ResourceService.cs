@@ -13,6 +13,8 @@ public class ResourceService
 
     private Vector3 targetPosition;
     
+    private int[,] grid = new int[6,6];
+    
     public static ResourceService GetInstance() {        
         lock (padlock) {
             if (instance == null)
@@ -96,5 +98,23 @@ public class ResourceService
         {
             Debug.LogError("GameObject was not in list of active objects!");
         }
+    }
+    
+    public void InstantiateGrid()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            for (int j = 0; j < 6; j++)
+            {
+                grid[i, j] = 0;
+            }
+        }
+    }
+    
+    public void AddValueToGrid(Vector3 position)
+    {
+        int x = Convert.ToInt32(Mathf.Floor((position.x / 10) + 3));
+        int y = Convert.ToInt32(Mathf.Floor((position.z / 10) + 3));
+        grid[x, y] += 10;
     }
 }

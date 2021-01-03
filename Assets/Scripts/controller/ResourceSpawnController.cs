@@ -18,7 +18,7 @@ public class ResourceSpawnController : MonoBehaviour
     
     public ResourceService resourceService = ResourceService.GetInstance();
     
-    private int maxSpawnAttemptsPerObject = 5;
+    private int maxSpawnAttemptsPerObject = 15;
 
     // Start is called before the first frame update
     void Awake()
