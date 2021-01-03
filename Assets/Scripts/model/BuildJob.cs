@@ -13,7 +13,8 @@ public class BuildJob : Job
     private bool spawnPlaceholder = true;
     private bool buildingDone = false;
 
-    public BuildJob(int priority, BuildingType buildingType, int energyRequired, int foodRequired) {
+    public BuildJob(int priority, BuildingType buildingType, int energyRequired, int foodRequired)
+    {
         this.priority = priority;
         this.buildingType = buildingType;
         this.energyRequired = energyRequired;
@@ -33,9 +34,8 @@ public class BuildJob : Job
             case BuildingType.FARM:
                 woodRequired = 100;
                 stoneRequired = 50;
-                if (Random.Range(0f,1f) >= 0.5f)
+                if (Random.Range(0f, 1f) >= 0.5f)
                 {
-                    
                     toSpawn = resourceSpawnController.fieldPrefabA;
                     break;
                 }
@@ -60,7 +60,6 @@ public class BuildJob : Job
             {
                 Debug.LogError("No valid position for structure found!");
             }
-            
         }
 
         //If flag is true then the structure can't be spawned
@@ -72,17 +71,17 @@ public class BuildJob : Job
                 {
                     //Store inventory in storage
                     StoreInventory();
-                    
+
                     //Remove Placeholder
                     resourceSpawnController.DestroyObject(resourceObject);
-                    
+
                     //Spawn finished structure
                     resourceSpawnController.SpawnObject(toSpawn, position, rotation);
-                    
+
                     //Spawn new Peasant
-                    resourceSpawnController.SpawnObject(resourceSpawnController.peasantPrefab, 
-                        resourceSpawnController.GetValidPosition(position,30,5,false), rotation);
-                    
+                    resourceSpawnController.SpawnObject(resourceSpawnController.peasantPrefab,
+                        resourceSpawnController.GetValidPosition(position, 30, 5, false), rotation);
+
                     //finish Job
                     peasant.energyLevel -= energyRequired;
                     peasant.foodLevel -= foodRequired;
@@ -98,7 +97,8 @@ public class BuildJob : Job
             else
             {
                 //If the peasant does not have a full inventory
-                if (peasant.inventory[ResourceType.WOOD] < Globals.inventoryCapacity || peasant.inventory[ResourceType.STONE] < Globals.inventoryCapacity)
+                if (peasant.inventory[ResourceType.WOOD] < Globals.inventoryCapacity ||
+                    peasant.inventory[ResourceType.STONE] < Globals.inventoryCapacity)
                 {
                     if (peasant.CheckPosition(Globals.storageLocation))
                     {
@@ -129,9 +129,12 @@ public class BuildJob : Job
             Debug.LogError("Job could not be executed properly!");
             jobDone = true;
             jobService.jobList.Remove(this);
+            
+            jobService.AddJob(new GatherJob(Globals.priorityGatherWood, ResourceType.WOOD, Globals.energyRequiredGatherWood, Globals.foodRequiredGatherWood));
+            jobService.AddJob(new GatherJob(Globals.priorityGatherStone, ResourceType.STONE, Globals.energyRequiredGatherStone, Globals.foodRequiredGatherStone));
         }
     }
-    
+
     private void TakeFromStorage()
     {
         peasant.animator.SetBool("isPickingUp", true);
@@ -139,7 +142,7 @@ public class BuildJob : Job
         if (timer >= 6f * Globals.actionCompleteDelay)
         {
             peasant.animator.SetBool("isPickingUp", false);
-            
+
             int currentResourceAmount = peasant.inventory[ResourceType.WOOD];
             storageService.TakeResource(ResourceType.WOOD, Globals.inventoryCapacity - currentResourceAmount);
             peasant.inventory[ResourceType.WOOD] += Globals.inventoryCapacity - currentResourceAmount;
@@ -151,7 +154,7 @@ public class BuildJob : Job
             timer = 0f;
         }
     }
-    
+
     private void BuildStructure()
     {
         peasant.animator.SetBool("isBuilding", true);
@@ -170,7 +173,7 @@ public class BuildJob : Job
                 peasant.inventory[ResourceType.WOOD] -= woodRequired;
                 woodRequired = 0;
             }
-            
+
             if (stoneRequired > Globals.inventoryCapacity)
             {
                 stoneRequired -= peasant.inventory[ResourceType.STONE];

@@ -20,9 +20,9 @@ public sealed class JobService
     }
 
     // Add job to joblist and order it by priority.
-    public void AddJob(Job jobToAd)
+    public void AddJob(Job jobToAdd)
     {
-        jobList.Add(jobToAd);
+        jobList.Add(jobToAdd);
         jobList = jobList.OrderBy(job => job.priority).ToList();
     }
     
