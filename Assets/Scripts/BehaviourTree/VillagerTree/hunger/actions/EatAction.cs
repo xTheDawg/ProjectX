@@ -5,7 +5,7 @@ public class EatAction : ActionNode
     private bool isEating = false;
     private float eatStartTime;
 
-    private StorageService storageService = new StorageService();
+    private StorageService storageService = StorageService.GetInstance();
 
     public override NodeState Execute()
     {
