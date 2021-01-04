@@ -7,6 +7,8 @@ public class BuildJob : Job
     private Quaternion rotation;
     private GameObject toSpawn;
     private ResourceSpawnController resourceSpawnController = GameObject.FindObjectOfType<ResourceSpawnController>();
+    
+    private JobService jobService = JobService.GetInstance();
 
     private int woodRequired;
     private int stoneRequired;
@@ -27,8 +29,8 @@ public class BuildJob : Job
         switch (buildingType)
         {
             case BuildingType.HOUSE:
-                woodRequired = 300;
-                stoneRequired = 200;
+                woodRequired = 500;
+                stoneRequired = 250;
                 toSpawn = resourceSpawnController.housePrefab;
                 break;
             case BuildingType.FARM:
@@ -58,7 +60,7 @@ public class BuildJob : Job
             }
             else
             {
-                Debug.LogError("No valid position for structure found!");
+                //Debug.LogError("No valid position for structure found!");
                 if (Globals.maxStructureDistance < 75)
                 {
                     Globals.maxStructureDistance = Globals.maxStructureDistance + 5;
@@ -82,9 +84,15 @@ public class BuildJob : Job
                     //Spawn finished structure
                     resourceSpawnController.SpawnObject(toSpawn, position, rotation);
 
-                    //Spawn new Peasant
-                    resourceSpawnController.SpawnObject(resourceSpawnController.peasantPrefab,
-                        resourceSpawnController.GetValidPosition(position, 15, 5, false), rotation);
+                    if (toSpawn == resourceSpawnController.housePrefab)
+                    {
+                        //Spawn new Peasant
+                        resourceSpawnController.SpawnObject(resourceSpawnController.peasantPrefab, 
+                            resourceSpawnController.GetValidPosition(position, 15, 5, false), rotation);
+                        
+                        //Request new Field
+                        jobService.AddJob(new BuildJob(Globals.priorityBuildFarm, BuildingType.FARM, Globals.energyRequiredBuildFarm, Globals.foodRequiredBuildFarm));
+                    }
 
                     //finish Job
                     peasant.energyLevel -= energyRequired;

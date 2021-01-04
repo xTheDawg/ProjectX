@@ -66,6 +66,13 @@ public class GatherJob : Job
         }
         else
         {
+            if (resourceType == ResourceType.FOOD)
+            {
+                Debug.LogError("Adding Gather FOOD Job from GatherJob");
+                jobService.AddJob(new BuildJob(Globals.priorityBuildFarm, BuildingType.FARM, Globals.energyRequiredBuildFarm, Globals.foodRequiredBuildFarm));
+                jobDone = true;
+                jobService.jobList.Remove(this);
+            }
             //Assign new resource to job
             resourceObject = resourceService.FindClosestResourceOfType(Globals.storageLocation, resourceType);
         }
@@ -78,7 +85,7 @@ public class GatherJob : Job
         if (timer >= 3.25f * Globals.actionCompleteDelay)
         {
             //Check how much the player can harvest based on inventory capacity
-            int harvestAmount = 50;
+            int harvestAmount = 25;
             if ((Globals.inventoryCapacity - peasant.inventory[resourceType]) < harvestAmount)
             {
                 harvestAmount = Globals.inventoryCapacity - peasant.inventory[resourceType];

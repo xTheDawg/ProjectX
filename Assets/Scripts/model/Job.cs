@@ -31,6 +31,8 @@ public abstract class Job {
             peasant.inventory[ResourceType.WOOD] = 0;
             storageService.PutResource(ResourceType.STONE, peasant.inventory[ResourceType.STONE]);
             peasant.inventory[ResourceType.STONE] = 0;
+            storageService.PutResource(ResourceType.FOOD, peasant.inventory[ResourceType.FOOD]);
+            peasant.inventory[ResourceType.FOOD] = 0;
 
             timer = 0;
         }

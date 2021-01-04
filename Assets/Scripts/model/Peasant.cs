@@ -11,8 +11,6 @@ public class Peasant : MonoBehaviour
     public int energyLevel { get; set; } = Globals.energyGameStart;
     public int maxEnergyLevel { get; set; } = Globals.energyMax;
 
-    public int inventoryCapacity { get; set; } = Globals.inventoryCapacity;
-    
     public Dictionary<ResourceType, int> inventory  {get; set;} = new Dictionary<ResourceType, int>();
 
     //Misc
@@ -22,8 +20,6 @@ public class Peasant : MonoBehaviour
     public Vector3 position { get; set; }
     public Quaternion rotation { get; set; }
     public float fatigueTimer { get; set; } = 0f;
-    public int woodInStorage { get; set; }
-    public int stoneInStorage { get; set; }
 
     //Fields for Pathfinding
     public float angle { get; set; }
@@ -66,7 +62,7 @@ public class Peasant : MonoBehaviour
         fatigueTimer += Time.deltaTime;
         if (fatigueTimer > 10f)
         {
-            fatigueTimer = fatigueTimer - 10f;
+            fatigueTimer = fatigueTimer - 30f;
             if (!animator.GetBool("isResting") && !animator.GetBool("isEating"))
             {
                 if (foodLevel <= 0)
@@ -75,7 +71,7 @@ public class Peasant : MonoBehaviour
                 }
                 else
                 {
-                    foodLevel = foodLevel - 7;
+                    foodLevel = foodLevel - 5;
                 }
 
                 if (energyLevel <= 0)
@@ -84,7 +80,7 @@ public class Peasant : MonoBehaviour
                 }
                 else
                 {
-                    energyLevel = energyLevel - 10;
+                    energyLevel = energyLevel - 5;
                 }
 
                 // Debug.Log("Energy Level: " + energyLevel + " Food level: " + foodLevel);

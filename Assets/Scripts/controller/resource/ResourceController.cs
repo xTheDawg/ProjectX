@@ -22,7 +22,7 @@ public class ResourceController : MonoBehaviour
                 resourceAmount = Random.Range(50, 100);
                 break;
             case "Field":
-                resourceAmount = Random.Range(300, 500);
+                resourceAmount = Random.Range(500, 750);
                 break;
         }
     }
